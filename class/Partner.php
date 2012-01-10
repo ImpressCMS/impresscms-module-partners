@@ -52,6 +52,12 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		$this->setControl("description", "dhtmltextarea");
 		$this->setControl("extended_text", "dhtmltextarea");
 		$this->setControl("address", "dhtmltextarea");
+		
+		// Set image path
+		$this->setControl('logo', array('name' => 'image'));
+		$url = ICMS_URL . '/uploads/' . basename(dirname(dirname(__FILE__))) . '/';
+		$path = ICMS_ROOT_PATH . '/uploads/' . basename(dirname(dirname(__FILE__))) . '/';
+		$this->setImageDir($url, $path);
 
 		// Intialise SEO functionality
 		$this->initiateSEO();

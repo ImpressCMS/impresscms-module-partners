@@ -36,10 +36,80 @@ function partners_db_upgrade_2() {
 }
 */
 
-function icms_module_update_partners($module) {
+function icms_module_update_partners($module)
+{
+	global $xoopsDB;
+
+	// create an uploads directory for logos
+	$path = ICMS_ROOT_PATH . '/uploads/' . basename(dirname(dirname(__FILE__)));
+	$directory_exists = $file_exists = $writeable = true;
+
+	// check if upload directory exists, make one if not, and write an empty index file
+	if (!is_dir($path)) {
+		$directory_exists = mkdir($path, 0777);
+		$path .= '/index.html';
+		
+		// add an index file to prevent index lookups
+		if (!is_file($path)) {
+			$filename = $path;	
+			$contents = '<script>history.go(-1);</script>';
+			$handle = fopen($filename, 'wb');
+			$result = fwrite($handle, $contents);
+			echo 'result is: ' . $result;
+			fclose($handle);
+			chmod($path, 0644);
+		}
+	}
+
+	// Authorise some image mimetypes for convenience
+	partners_authorise_mimetypes();
+	
     return TRUE;
 }
 
-function icms_module_install_partners($module) {
+function icms_module_install_partners($module)
+{
 	return TRUE;
+}
+
+/**
+ * Authorises some common audio (and image) mimetypes on install
+ *
+ * Helps reduce the need for post-install configuration, its just a convenience for the end user.
+ * It grants the module permission to use some common audio (and image) mimetypes that will
+ * probably be needed for audio tracks and programme cover art.
+ */
+function partners_authorise_mimetypes()
+{
+	$dirname = basename(dirname(dirname(__FILE__)));
+	$extension_list = array('png', 'gif', 'jpg');
+	$system_mimetype_handler = icms_getModuleHandler('mimetype', 'system');
+	foreach ($extension_list as $extension)
+	{
+		$allowed_modules = array();
+		$mimetypeObj = '';
+
+		$criteria = new icms_db_criteria_Compo();
+		$criteria->add(new icms_db_criteria_Item('extension', $extension));
+		$mimetypeObj = array_shift($system_mimetype_handler->getObjects($criteria));
+
+		if ($mimetypeObj)
+		{
+			$allowed_modules = $mimetypeObj->getVar('dirname');
+			if (empty($allowed_modules))
+			{
+				$mimetypeObj->setVar('dirname', $dirname);
+				$mimetypeObj->store();
+			}
+			else
+			{
+				if (!in_array($dirname, $allowed_modules))
+				{
+					$allowed_modules[] = $dirname;
+					$mimetypeObj->setVar('dirname', $allowed_modules);
+					$mimetypeObj->store();
+				}
+			}
+		}
+	}
 }
