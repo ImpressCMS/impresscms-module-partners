@@ -1,0 +1,23 @@
+<{includeq file='db:partners_header.html'}>
+<{if $partners_partner}>
+	<div>
+		<h1><{$partners_partner.title}></h1>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_LOGO}></b>: <{$partners_partner.logo}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_WEBSITE}></b>: <{$partners_partner.website}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_DESCRIPTION}></b>: <{$partners_partner.description}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_EXTENDED_TEXT}></b></div>
+					<div><{$partners_partner.extended_text}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_NAME}></b>: <{$partners_partner.contact_name}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_POSITION}></b>: <{$partners_partner.contact_position}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_EMAIL}></b>: <{$partners_partner.contact_email}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_PHONE}></b>: <{$partners_partner.contact_phone}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_FAX}></b>: <{$partners_partner.contact_fax}></div>
+			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_ADDRESS}></b></div>
+			<div><{$partners_partner.address}></div>
+	<div>
+<{/if}>
+<{if $partners_partner_table}>
+	<h1><{$partners_title}></h1>
+	<{$partners_partner_table}>
+<{/if}>
+<{includeq file='db:partners_footer.html'}>
