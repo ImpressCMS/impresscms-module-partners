@@ -1,4 +1,6 @@
 <{includeq file='db:partners_header.html'}>
+
+<!-- View single partner -->
 <{if $partners_partner}>
 	<div>
 		<h1><{$partners_partner.title}></h1>
@@ -16,8 +18,28 @@
 			<div><{$partners_partner.address}></div>
 	<div>
 <{/if}>
+
+<!-- View partner index in summary mode -->
+<{if $partner_summaries}>
+	<div>
+		<!-- pagination control -->
+		<{if $partners_navbar }><{$partners_navbar}><{/if}>
+		
+		<{foreach item = partner from = $partner_summaries}>
+			<div>
+				<{$partner.title}>
+			</div>
+		<{/foreach}>
+
+		<!-- pagination control -->
+		<{if $partners_navbar }><{$partners_navbar}><{/if}>
+	</div>
+<{/if}>
+
+<!-- View partner index as compact table -->
 <{if $partners_partner_table}>
 	<h1><{$partners_title}></h1>
 	<{$partners_partner_table}>
 <{/if}>
+
 <{includeq file='db:partners_footer.html'}>

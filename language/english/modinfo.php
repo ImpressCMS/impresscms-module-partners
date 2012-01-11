@@ -16,6 +16,10 @@ define("_MI_PARTNERS_MD_NAME", "partners");
 define("_MI_PARTNERS_MD_DESC", "ImpressCMS Simple partners");
 define("_MI_PARTNERS_PARTNERS", "Partners");
 define("_MI_PARTNERS_TEMPLATES", "Templates");
+
+// Preferences
+define("_MI_PARTNERS_INDEX_DISPLAY_MODE", "Display index as list of summaries");
+define("_MI_PARTNERS_INDEX_DISPLAY_MODE_DSC", "Toggles the display of the index page between a list of summaries (yes) and a compact list of tables (no).");
 define("_MI_PARTNERS_NUMBER_PARTNERS_PER_PAGE", "Number of partners per page");
 define("_MI_PARTNERS_NUMBER_PARTNERS_PER_PAGE_DSC", "Controls how many partners are shown on the index page, sane value is 5-10.");
 define("_MI_PARTNERS_SHOW_TAG_SELECT_BOX", "Show tag select box");

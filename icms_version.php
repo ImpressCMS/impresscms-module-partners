@@ -88,9 +88,17 @@ $modversion['templates'] = array(
 
 /** Preferences */
 $modversion['config'][1] = array(
+  'name' => 'index_display_mode',
+  'title' => '_MI_PARTNERS_INDEX_DISPLAY_MODE',
+  'description' => '_MI_PARTNERS_INDEX_DISPLAY_MODE_DSC',
+  'formtype' => 'yesno',
+  'valuetype' => 'int',
+  'default' =>  '1');
+
+$modversion['config'][] = array(
   'name' => 'number_of_partners_per_page',
   'title' => '_MI_PARTNERS_NUMBER_PARTNERS_PER_PAGE',
-  'description' => '_MI_PARTNERS_NUMBER_PARTNERS_PER_PAGEDSC',
+  'description' => '_MI_PARTNERS_NUMBER_PARTNERS_PER_PAGE_DSC',
   'formtype' => 'textbox',
   'valuetype' => 'int',
   'default' =>  '5');
