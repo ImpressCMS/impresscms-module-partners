@@ -54,7 +54,7 @@ $modversion = array(
 	"onUpdate"					=> "include/onupdate.inc.php",
 
 /** Search information */
-	"hasSearch"					=> 0,
+	"hasSearch"					=> 1,
 	"search"					=> array("file" => "include/search.inc.php", "func" => "partners_search"),
 
 /** Menu information */

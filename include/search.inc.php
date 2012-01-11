@@ -14,24 +14,22 @@
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 
-function partners_search($queryarray, $andor, $limit, $offset, $userid) {
-/** To come soon in imBuilding...
-
-	$partners_post_handler = icms_getModuleHandler("post", basename(dirname(dirname(__FILE__))), "partners");
-	$postsArray = $partners_post_handler->getPostsForSearch($queryarray, $andor, $limit, $offset, $userid);
-
+function partners_search($queryarray, $andor, $limit, $offset, $userid)
+{
+	$partners_partner_handler = icms_getModuleHandler("partner", basename(dirname(dirname(__FILE__))), "partners");
+	$partnerArray = $partners_partner_handler->getPartnersForSearch($queryarray, $andor, $limit, $offset, $userid);
 	$ret = array();
 
-	foreach ($postsArray as $postArray) {
-		$item['image'] = "images/post.png";
-		$item['link'] = str_replace(PARTNERS_URL, '', $postArray['itemUrl']);
-		$item['title'] = $postArray['post_title'];
-		$item['time'] = strtotime($postArray['post_published_date']);
-		$item['uid'] = $postArray['post_posterid'];
+	foreach ($partnerArray as $partner) 
+	{
+		$item['image'] = "images/partner.png";
+		$item['link'] = $partner->getItemLink(TRUE);
+		$item['title'] = $partner->getVar("title");
+		$item['time'] = $partner->getVar("date", "e");
+		$item['uid'] = $partner->getVar("creator");
 		$ret[] = $item;
 		unset($item);
 	}
 
 	return $ret;
-*/
 }

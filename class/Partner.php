@@ -20,7 +20,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 	 * @param mod_partners_Partner $handler Object handler
 	 */
 	public function __construct(&$handler)
-	{
+	{		
 		icms_ipf_object::__construct($handler);
 
 		$this->quickInitVar("partner_id", XOBJ_DTYPE_INT, TRUE);
@@ -86,7 +86,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 	 */
 	public function getWeightControl()
 	{
-		$control = new icms_form_elements_Text('','weight[]',5,7,$this->getVar( 'weight', 'e'));
+		$control = new icms_form_elements_Text('','weight[]',5,7,$this->getVar('weight', 'e'));
 		$control->setExtra('style="text-align:center;"');
 		return $control->render();
 	}

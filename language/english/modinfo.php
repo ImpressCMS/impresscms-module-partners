@@ -34,3 +34,5 @@ define("_MI_PARTNERS_LOGO_UPLOAD_WIDTH", "Maximum width of logo files (pixels)")
 define("_MI_PARTNERS_LOGO_UPLOAD_WIDTH_DSC", "Logo files may not exceed this value.");
 define("_MI_PARTNERS_LOGO_FILE_SIZE", "Maximum file size of logo files (bytes)");
 define("_MI_PARTNERS_LOGO_FILE_SIZE_DSC", "Logo files may not exceed this value.");
+define("_MI_PARTNERS_DATE_FORMAT", "Date format");
+define("_MI_PARTNERS_DATE_FORMAT_DSC", "Controls the format of the date returned in search results, see the <a href='http://php.net/manual/en/function.date.php'>PHP manual</a> for formatting options.");
