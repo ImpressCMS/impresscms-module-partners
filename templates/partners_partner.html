@@ -22,17 +22,43 @@
 <!-- View partner index in summary mode -->
 <{if $partner_summaries}>
 	<div>
+		
 		<!-- pagination control -->
-		<{if $partners_navbar }><{$partners_navbar}><{/if}>
+		<div>
+			<{if $partners_navbar }><{$partners_navbar}><{/if}>
+		</div>
 		
 		<{foreach item = partner from = $partner_summaries}>
-			<div>
-				<{$partner.title}>
+		
+			<div class="partners_separator">
+				<{if $partner.logo && $display_partner_logos}>
+					<{if $freestyle_logo_dimensions}>
+					
+						<div class="partners_float_left">
+							<a href="<{$partner.itemUrl}>"><img src="<{$partner.logo}>" alt="<{$partner.title}>" /></a>
+						</div>
+					
+					<{else}>
+					
+						<div class="partners_float_left">
+							<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$logo_display_width height="999" fit="inside"}></a>
+						</div>
+					
+					<{/if}>
+				<{/if}>
+				<div>
+					<h2><a href="<{$partner.itemUrl}>"><{$partner.title}></a></h2>
+					<p><{$partner.description}></p>
+				</div>
 			</div>
+		
 		<{/foreach}>
 
 		<!-- pagination control -->
-		<{if $partners_navbar }><{$partners_navbar}><{/if}>
+		<div>
+			<{if $partners_navbar }><{$partners_navbar}><{/if}>
+		</div>
+		
 	</div>
 <{/if}>
 

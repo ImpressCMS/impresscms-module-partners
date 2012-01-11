@@ -1,6 +1,6 @@
 <?php
 /**
-* Partner page
+* Partner index page - displays details of a single partner, a list of partner summary descriptions or a compact table of partners
 *
 * @copyright	Copyright Madfish (Simon Wilkinson) 2012
 * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
@@ -24,11 +24,19 @@ $partners_partner_handler = icms_getModuleHandler("partner", basename(dirname(__
 $criteria = icms_buildCriteria(array('online_status' => '1'));
 $partnerObj = $partners_partner_handler->get($clean_partner_id, TRUE, FALSE, $criteria);
 
+// Get relative path to document root for this ICMS install. This is required to call the logos correctly if ICMS is installed in a subdirectory
+$directory_name = basename(dirname(__FILE__));
+$script_name = getenv("SCRIPT_NAME");
+$document_root = str_replace('modules/' . $directory_name . '/partner.php', '', $script_name);
+
 ////////// VIEW SINGLE PARTNER //////////
 
-if($partnerObj && !$partnerObj->isNew()) 
+if($partnerObj && !$partnerObj->isNew())
 {
-	$icmsTpl->assign("partners_partner", $partnerObj->toArray());
+	$partner = $partnerObj->toArray();
+	$partner['logo'] = $document_root . 'uploads/' . $directory_name . '/partner/' . $partner['logo'];
+	
+	$icmsTpl->assign("partners_partner", $partner);
 
 	$icms_metagen = new icms_ipf_Metagen($partnerObj->getVar("title"), $partnerObj->getVar("meta_keywords", "n"), $partnerObj->getVar("meta_description", "n"));
 	$icms_metagen->createMetaTags();
@@ -54,17 +62,32 @@ else
 		$criteria->setSort('title');
 		$criteria->setOrder('ASC');
 		$partner_summaries = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
+		
+		// Adjust the partner logo paths to allow dynamic resizing as per the resized_image Smarty plugin
+		foreach ($partner_summaries as &$partner)
+		{
+			$partner['logo'] = $document_root . 'uploads/' . $directory_name . '/partner/'
+				. $partner['logo'];
+		}
 		$icmsTpl->assign('partner_summaries', $partner_summaries);
 		
+		// Assign logo preferences to template
+		$icmsTpl->assign('display_partner_logos', icms::$module->config['display_partner_logos']);
+		$icmsTpl->assign('freestyle_logo_dimensions', icms::$module->config['freestyle_logo_dimensions']);
+		$icmsTpl->assign('logo_display_width', icms::$module->config['logo_display_width']);
+		$icmsTpl->assign('logo_path', ICMS_URL . '/uploads/' . PARTNERS_DIRNAME . '/partner/');
+		
+		// Pagination control
 		$pagenav = new icms_view_PageNav($partner_count, icms::$module->config['number_of_partners_per_page'],
 			$clean_start, 'start');
-		
 		$icmsTpl->assign('partners_navbar', $pagenav->renderNav());
 	}
 	else 
 	{
 		// View partners in compact table
-		$objectTable = new icms_ipf_view_Table($partners_partner_handler, FALSE, array());
+		$criteria = new icms_db_criteria_Compo();
+		$criteria->add(new icms_db_criteria_Item('online_status', TRUE));
+		$objectTable = new icms_ipf_view_Table($partners_partner_handler, $criteria, array());
 		$objectTable->isForUserSide();
 		$objectTable->addColumn(new icms_ipf_view_Column("title"));
 		$icmsTpl->assign("partners_partner_table", $objectTable->fetch());
