@@ -32,9 +32,36 @@
 	margin: 0em 1em 1em 0em;
 }
 
+/* Used to prevent partners overlapping logos of others on the index page */
+.partners_clear
+{
+	clear:both;
+}
+
 /* Used to vertically space elements to neaten up the display */
 .partners_separator 
 {
-	clear: both;
 	margin-bottom:1em;
+}
+
+/* Tableless layout */
+.partners_table
+{
+	display: table;
+}
+
+.partners_row
+{
+	display: table-row;
+}
+
+.partners_left_cell
+{
+	display: table-cell;
+	padding-right: 1em;
+}
+
+.partners_right_cell
+{
+	display: table-cell;
 }

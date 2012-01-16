@@ -26,7 +26,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		$this->quickInitVar("partner_id", XOBJ_DTYPE_INT, TRUE);
 		$this->quickInitVar("title", XOBJ_DTYPE_TXTBOX, TRUE);
 		$this->quickInitVar("logo", XOBJ_DTYPE_IMAGE, FALSE);
-		$this->quickInitVar("website", XOBJ_DTYPE_URL, FALSE);
+		$this->quickInitVar("website", XOBJ_DTYPE_TXTBOX, FALSE);
 		$this->quickInitVar("description", XOBJ_DTYPE_TXTAREA, TRUE);
 		$this->quickInitVar("extended_text", XOBJ_DTYPE_TXTAREA, FALSE);
 		$this->quickInitVar("contact_name", XOBJ_DTYPE_TXTBOX, FALSE);

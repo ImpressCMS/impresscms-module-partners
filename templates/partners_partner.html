@@ -3,19 +3,72 @@
 <!-- View single partner -->
 <{if $partners_partner}>
 	<div>
-		<h1><{$partners_partner.title}></h1>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_LOGO}></b>: <{$partners_partner.logo}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_WEBSITE}></b>: <{$partners_partner.website}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_DESCRIPTION}></b>: <{$partners_partner.description}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_EXTENDED_TEXT}></b></div>
-					<div><{$partners_partner.extended_text}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_NAME}></b>: <{$partners_partner.contact_name}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_POSITION}></b>: <{$partners_partner.contact_position}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_EMAIL}></b>: <{$partners_partner.contact_email}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_PHONE}></b>: <{$partners_partner.contact_phone}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_FAX}></b>: <{$partners_partner.contact_fax}></div>
-			<div><b><{$smarty.const._CO_PARTNERS_PARTNER_ADDRESS}></b></div>
-			<div><{$partners_partner.address}></div>
+		<{if $partners_partner.website}>
+			<div><h1><a href="<{$partners_partner.website}>"><{$partners_partner.title}></a></h1></div>
+		<{else}>
+			<div><h1><{$partners_partner.title}></h1></div>
+		<{/if}>
+		<{if $partners_partner.logo && $display_partner_logos}>
+			<{if $freestyle_logo_dimensions}>
+				<div class="<{$partner_logo_position}>">
+					<a href="<{$partners_partner.website}>"><img src="<{$partners_partner.logo}>" alt="<{$partners_partner.title}>" /></a>
+				</div>
+			<{else}>
+
+				<div class="<{$partner_logo_position}>">
+					<a href="<{$partners_partner.website}>"><{resized_image file=$partners_partner.logo width=$logo_display_width height="999" fit="inside"}></a>
+				</div>
+			<{/if}>
+		<{/if}>
+		<{if $partners_partner.extended_text}>
+			<div class="partners_separator"><{$partners_partner.extended_text}></div>
+		<{else}>
+			<div class="partners_separator"><{$partners_partner.description}></div>
+		<{/if}>
+		<div class="partners_table">
+			<{if $partners_partner.contact_name}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_NAME}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_name}></div>
+				</div>
+			<{/if}>
+			<{if $partners.partner.contact_name && $partners_partner.contact_position}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_POSITION}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_position}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.contact_phone}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_PHONE}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_phone}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.contact_fax}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_FAX}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_fax}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.contact_email}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_EMAIL}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_email}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.address}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_ADDRESS}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.address}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.website}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_WEBSITE}>: </strong></div>
+					<div class="partners_right_cell"><a href="<{$partners_partner.website}>"><{$partners_partner.website}></a></div>
+				</div>
+			<{/if}>
+		</div>
 	</div>
 <{/if}>
 
@@ -30,17 +83,17 @@
 		
 		<{foreach item = partner from = $partner_summaries}>
 		
-			<div class="partners_separator">
+			<div class="partners_separator partners_clear">
 				<{if $partner.logo && $display_partner_logos}>
 					<{if $freestyle_logo_dimensions}>
 					
-						<div class="partners_float_left">
+						<div class="<{$partner_logo_position}>">
 							<a href="<{$partner.itemUrl}>"><img src="<{$partner.logo}>" alt="<{$partner.title}>" /></a>
 						</div>
 					
 					<{else}>
 					
-						<div class="partners_float_left">
+						<div class="<{$partner_logo_position}>">
 							<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$logo_display_width height="999" fit="inside"}></a>
 						</div>
 					

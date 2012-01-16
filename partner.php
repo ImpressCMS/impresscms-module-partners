@@ -29,6 +29,19 @@ $directory_name = basename(dirname(__FILE__));
 $script_name = getenv("SCRIPT_NAME");
 $document_root = str_replace('modules/' . $directory_name . '/partner.php', '', $script_name);
 
+// Assign common logo preferences to template
+$icmsTpl->assign('display_partner_logos', icms::$module->config['display_partner_logos']);
+$icmsTpl->assign('freestyle_logo_dimensions', icms::$module->config['freestyle_logo_dimensions']);
+$icmsTpl->assign('logo_display_width', icms::$module->config['logo_index_display_width']);
+if (icms::$module->config['partner_logo_position'] == 1) // Align right
+{
+	$icmsTpl->assign('partner_logo_position', 'partners_float_right');
+}
+else // Align left
+{
+	$icmsTpl->assign('partner_logo_position', 'partners_float_left');
+}
+
 ////////// VIEW SINGLE PARTNER //////////
 
 if($partnerObj && !$partnerObj->isNew())
@@ -70,12 +83,6 @@ else
 				. $partner['logo'];
 		}
 		$icmsTpl->assign('partner_summaries', $partner_summaries);
-		
-		// Assign logo preferences to template
-		$icmsTpl->assign('display_partner_logos', icms::$module->config['display_partner_logos']);
-		$icmsTpl->assign('freestyle_logo_dimensions', icms::$module->config['freestyle_logo_dimensions']);
-		$icmsTpl->assign('logo_display_width', icms::$module->config['logo_display_width']);
-		$icmsTpl->assign('logo_path', ICMS_URL . '/uploads/' . PARTNERS_DIRNAME . '/partner/');
 		
 		// Pagination control
 		$pagenav = new icms_view_PageNav($partner_count, icms::$module->config['number_of_partners_per_page'],

@@ -23,7 +23,7 @@ define("_CO_PARTNERS_PARTNER_DESCRIPTION", "Description");
 define("_CO_PARTNERS_PARTNER_DESCRIPTION_DSC", "A summary description of your partner. This will be displayed on the partner index page.");
 define("_CO_PARTNERS_PARTNER_EXTENDED_TEXT", "Extended description");
 define("_CO_PARTNERS_PARTNER_EXTENDED_TEXT_DSC", "The full description of your partner (optional). This will be displayed when the full details of the partner are viewed. If you leave this blank, the summary description will be displayed instead.");
-define("_CO_PARTNERS_PARTNER_CONTACT_NAME", "Contact name");
+define("_CO_PARTNERS_PARTNER_CONTACT_NAME", "Contact");
 define("_CO_PARTNERS_PARTNER_CONTACT_NAME_DSC", "The contact person of your partner.");
 define("_CO_PARTNERS_PARTNER_CONTACT_POSITION", "Contact position");
 define("_CO_PARTNERS_PARTNER_CONTACT_POSITION_DSC", "Job title of your partner&#039;s contact person.");

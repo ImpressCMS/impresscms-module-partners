@@ -128,6 +128,15 @@ $modversion['config'][] = array(
 	'default' => '1');
 
 $modversion['config'][] = array(
+	'name' => 'partner_logo_position',
+	'title' => '_MI_PARTNERS_PARTNER_LOGO_POSITION',
+	'description' => '_MI_PARTNERS_PARTNER_LOGO_POSITION_DSC',
+	'formtype' => 'select',
+	'valuetype' => 'int',
+	'options' => array('_MI_PARTNERS_LEFT' => 0, '_MI_PARTNERS_RIGHT' => 1),
+	'default' => 'Left');
+
+$modversion['config'][] = array(
 	'name' => 'freestyle_logo_dimensions',
 	'title' => '_MI_PARTNERS_FREESTYLE_LOGO_DIMENSIONS',
 	'description' => '_MI_PARTNERS_FREESTYLE_LOGO_DIMENSIONS_DSC',
@@ -136,12 +145,20 @@ $modversion['config'][] = array(
 	'default' => '0');
 
 $modversion['config'][] = array(
-  'name' => 'logo_display_width',
-  'title' => '_MI_PARTNERS_LOGO_DISPLAY_WIDTH',
-  'description' => '_MI_PARTNERS_LOGO_DISPLAY_WIDTH_DSC',
+  'name' => 'logo_index_display_width',
+  'title' => '_MI_PARTNERS_LOGO_INDEX_DISPLAY_WIDTH',
+  'description' => '_MI_PARTNERS_LOGO_INDEX_DISPLAY_WIDTH_DSC',
   'formtype' => 'text',
   'valuetype' => 'int',
   'default' =>  '150');
+
+$modversion['config'][] = array(
+  'name' => 'logo_single_display_width',
+  'title' => '_MI_PARTNERS_LOGO_SINGLE_DISPLAY_WIDTH',
+  'description' => '_MI_PARTNERS_LOGO_SINGLE_DISPLAY_WIDTH_DSC',
+  'formtype' => 'text',
+  'valuetype' => 'int',
+  'default' =>  '300');
 
 $modversion['config'][] = array(
 	'name' => 'logo_upload_height',
