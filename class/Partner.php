@@ -27,6 +27,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		$this->quickInitVar("title", XOBJ_DTYPE_TXTBOX, TRUE);
 		$this->quickInitVar("logo", XOBJ_DTYPE_IMAGE, FALSE);
 		$this->quickInitVar("website", XOBJ_DTYPE_TXTBOX, FALSE);
+		$this->initNonPersistableVar('tag', XOBJ_DTYPE_INT, 'tag', false, false, false, true);
 		$this->quickInitVar("description", XOBJ_DTYPE_TXTAREA, TRUE);
 		$this->quickInitVar("extended_text", XOBJ_DTYPE_TXTAREA, FALSE);
 		$this->quickInitVar("contact_name", XOBJ_DTYPE_TXTBOX, FALSE);
@@ -58,6 +59,22 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		$url = ICMS_URL . '/uploads/' . basename(dirname(dirname(__FILE__))) . '/';
 		$path = ICMS_ROOT_PATH . '/uploads/' . basename(dirname(dirname(__FILE__))) . '/';
 		$this->setImageDir($url, $path);
+		
+		// Only display the tag field if the sprockets module is installed
+		$sprocketsModule = icms_getModuleInfo('sprockets');
+		if ($sprocketsModule)
+		{
+			$this->setControl('tag', array(
+			'name' => 'select_multi',
+			'itemHandler' => 'tag',
+			'method' => 'getTags',
+			'module' => 'sprockets'));
+		}
+		else 
+		{
+			$this->hideFieldFromForm('tag');
+			$this->hideFieldFromSingleView ('tag');
+		}
 
 		// Intialise SEO functionality
 		$this->initiateSEO();
@@ -110,6 +127,24 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 			return '<a href="' . ICMS_URL . '/modules/' . basename(dirname(dirname(__FILE__)))
 				. '/admin/partner.php?partner_id=' . $this->getVar('partner_id') . '&amp;op=visible">
 				<img src="../images/button_ok.png" alt="Online" /></a>';
+		}
+	}
+	
+	/**
+	 * Load tags linked to this partner
+	 *
+	 * @return void
+	 */
+	public function loadTags() {
+		
+		$ret = '';
+		
+		$sprocketsModule = icms_getModuleInfo('sprockets');
+		if ($sprocketsModule) {
+			$sprockets_taglink_handler = icms_getModuleHandler('taglink',
+					$sprocketsModule->getVar('dirname'), 'sprockets');
+			$ret = $sprockets_taglink_handler->getTagsForObject($this->id(), $this->handler);
+			$this->setVar('tag', $ret);
 		}
 	}
 }

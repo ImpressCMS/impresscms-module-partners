@@ -96,4 +96,46 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 		
 		return $this->getObjects($criteria, true, true);
 	}
+	
+	/**
+	 * Stores tags when a partner is inserted or updated
+	 *
+	 * @param object $obj PartnersPartner object
+	 * @return bool
+	 */
+	protected function afterSave(& $obj) {
+		
+		$sprockets_taglink_handler = '';
+		$sprocketsModule = icms_getModuleInfo('sprockets');
+		
+		if ($sprocketsModule) {
+			$sprockets_taglink_handler = icms_getModuleHandler('taglink', 
+					$sprocketsModule->getVar('dirname'), 'sprockets');
+			$sprockets_taglink_handler->storeTagsForObject($obj);
+		}
+
+		return true;
+	}
+	
+	/**
+	 * Deletes taglinks when a partner is deleted
+	 *
+	 * @param object $obj PartnersPartner object
+	 * @return bool
+	 */
+	protected function afterDelete(& $obj) {
+		
+		$sprocketsModule = $notification_handler = $module_handler = $module = $module_id
+				= $category = $item_id = '';
+		
+		$sprocketsModule = icms_getModuleInfo('sprockets');
+		
+		if ($sprocketsModule) {
+			$sprockets_taglink_handler = icms_getModuleHandler('taglink',
+					$sprocketsModule->getVar('dirname'), 'sprockets');
+			$sprockets_taglink_handler->deleteAllForObject(&$obj);
+		}
+
+		return true;
+	}
 }

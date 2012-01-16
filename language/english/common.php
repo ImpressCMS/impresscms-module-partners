@@ -12,13 +12,18 @@
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 
-// partner
+// Module name for user side
+define("_CO_PARTNERS_PARTNERS", "Partners");
+
+// Partner
 define("_CO_PARTNERS_PARTNER_TITLE", "Title");
 define("_CO_PARTNERS_PARTNER_TITLE_DSC", "The name of your partner.");
 define("_CO_PARTNERS_PARTNER_LOGO", "Logo");
 define("_CO_PARTNERS_PARTNER_LOGO_DSC", "Upload your partner&#039;s logo. You can resize logos in the module preferences.");
 define("_CO_PARTNERS_PARTNER_WEBSITE", "Website");
 define("_CO_PARTNERS_PARTNER_WEBSITE_DSC", "The URL of your partner&#039;s website.");
+define("_CO_PARTNERS_PARTNER_TAG", "Tag");
+define("_CO_PARTNERS_PARTNER_TAG_DSC", "You may assign tags to the partner if you wish.");
 define("_CO_PARTNERS_PARTNER_DESCRIPTION", "Description");
 define("_CO_PARTNERS_PARTNER_DESCRIPTION_DSC", "A summary description of your partner. This will be displayed on the partner index page.");
 define("_CO_PARTNERS_PARTNER_EXTENDED_TEXT", "Extended description");
@@ -43,3 +48,6 @@ define("_CO_PARTNERS_PARTNER_WEIGHT", "Weight");
 define("_CO_PARTNERS_PARTNER_WEIGHT_DSC", "Controls the sorting order. Lower weights are listed first.");
 define("_CO_PARTNERS_PARTNER_ONLINE_STATUS", "Online status");
 define("_CO_PARTNERS_PARTNER_ONLINE_STATUS_DSC", "Set this partner online (yes) or offline (no).");
+
+// Tag select box
+define("_CO_PARTNERS_PARTNER_ALL_TAGS", "-- All --");

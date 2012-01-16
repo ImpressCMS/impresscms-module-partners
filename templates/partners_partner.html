@@ -76,7 +76,14 @@
 <{if $partner_summaries}>
 	<div>
 		
-		<!-- pagination control -->
+		<!-- Tag select box -->
+		<div>
+			<{if $partners_tag_select_box}>
+				<{$partners_tag_select_box}>
+			<{/if}>
+		</div>
+		
+		<!-- Pagination control -->
 		<div>
 			<{if $partners_navbar }><{$partners_navbar}><{/if}>
 		</div>
@@ -107,7 +114,7 @@
 		
 		<{/foreach}>
 
-		<!-- pagination control -->
+		<!-- Pagination control -->
 		<div>
 			<{if $partners_navbar }><{$partners_navbar}><{/if}>
 		</div>

@@ -1,8 +1,13 @@
-<div class="partners_headertable">
-	<{if $partners_module_home}>
-	<span class="partners_modulename"><{$partners_module_home}></span>
-	<{/if}>
-	<{if $partners_category_path}>
-	<span class="partners_breadcrumb"><{if $partners_module_home}>&gt;<{/if}><{$partners_category_path}></span>
-	<{/if}>
-</div>
+<{if $show_breadcrumb == TRUE}>
+	<div class="partners_headertable">
+
+			<{if $partners_module_home}>
+				<span class="partners_modulename"><{$partners_module_home}></span>
+			<{/if}>
+			<{if $partners_category_path}>
+				<span class="partners_breadcrumb"><{if $partners_module_home}>&gt; <{/if}><{$partners_category_path}></span>
+			<{/if}>
+	</div>
+<{else}>
+	<h1><{$smarty.const._CO_PARTNERS_PARTNERS}></h1>
+<{/if}>

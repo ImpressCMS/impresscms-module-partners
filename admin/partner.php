@@ -24,6 +24,7 @@ function editpartner($partner_id = 0)
 	$partnerObj = $partners_partner_handler->get($partner_id);
 
 	if (!$partnerObj->isNew()){
+		$partnerObj->loadTags();
 		$icmsModule->displayAdminMenu(0, _AM_PARTNERS_PARTNERS . " > " . _CO_ICMS_EDITING);
 		$sform = $partnerObj->getForm(_AM_PARTNERS_PARTNER_EDIT, "addpartner");
 		$sform->assign($icmsAdminTpl);
