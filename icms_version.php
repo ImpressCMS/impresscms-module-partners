@@ -36,7 +36,7 @@ $modversion = array(
 	"status_version"			=> "1.0",
 	"status"					=> "Beta",
 	"date"						=> "Unreleased",
-	"author_word"				=> "",
+	"author_word"				=> "For ICMS 1.3+ only.",
 	"warning"					=> _CO_ICMS_WARNING_BETA,
 
 /** Contributors */

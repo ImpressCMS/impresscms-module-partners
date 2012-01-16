@@ -74,9 +74,16 @@ else
 		
 		$sprocketsModule = icms_getModuleInfo('sprockets');
 		
+		// Load Sprockets language file, if required, to stop nagging warning notices
+		if ($sprocketsModule)
+		{
+			icms_loadLanguageFile("sprockets", "common");
+		}
+		
 		// Get a select box (if preferences allow, and only if Sprockets module installed)
 		if ($sprocketsModule && icms::$module->config['show_tag_select_box'] == TRUE)
 		{
+			
 			// Initialise
 			$partners_tag_name = '';
 			$tag_buffer = $tagList = array();
