@@ -197,9 +197,19 @@ else
 		}
 		$icmsTpl->assign('partner_summaries', $partner_summaries);
 		
+		// Adjust pagination for tag, if present
+		if (!empty($clean_tag_id))
+		{
+			$extra_arg = 'tag_id=' . $clean_tag_id;
+		}
+		else
+		{
+			$extra_arg = false;
+		}
+		
 		// Pagination control
 		$pagenav = new icms_view_PageNav($partner_count, icms::$module->config['number_of_partners_per_page'],
-			$clean_start, 'start');
+				$clean_start, 'start', $extra_arg);
 		$icmsTpl->assign('partners_navbar', $pagenav->renderNav());
 	}
 	else 
