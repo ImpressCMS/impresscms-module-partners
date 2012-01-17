@@ -28,35 +28,60 @@ function show_random_partners($options)
 	$partners_partner_handler = icms_getModuleHandler('partner', $partnersModule->getVar('dirname'), 'partners');
 	$sprockets_taglink_handler = icms_getModuleHandler('taglink', $sprocketsModule->getVar('dirname'), 'sprockets');
 	
+	$criteria = new icms_db_criteria_Compo();
+	$partnerList = $partners = array();
+
+	// Get a list of partners filtered by tag and count them
 	if ($sprocketsModule && $options[1] != 0)
 	{
-		// Optionally prepare an array of random partner ids
-		if ($options[2] == TRUE) // Randomised and filtered by tag
+		$query = "SELECT `partner_id` FROM " . $partners_partner_handler->table . ", "
+			. $sprockets_taglink_handler->table
+			. " WHERE `partner_id` = `iid`"
+			. " AND `tid` = '" . $options[1] . "'"
+			. " AND `mid` = '" . $partnersModule->getVar('mid') . "'"
+			. " AND `item` = 'partner'"
+			. " AND `online_status` = '1'"
+			. " ORDER BY `date` DESC";
+
+		$result = icms::$xoopsDB->query($query);
+
+		if (!$result)
 		{
-			
+			echo 'Error: Random partners block';
+			exit;
 
 		}
-		else // Not randomised, but filtered by tag
+		else
 		{
-
+			$rows = $partners_partner_handler->convertResultSet($result, TRUE, FALSE);
+			foreach ($rows as $key => $row) 
+			{
+				$partner_list[$key] = $row['partner_id'];
+			}
 		}
 	}
-	else // No Sprockets module / no tag filter
+	// Otherwise just get a list of all partners
+	else 
 	{
-		// Get a list of online partner_ids and count them
-		$criteria = icms_buildCriteria(array('online_status' => '1'));
+		$criteria->add(new icms_db_criteria_Item('online_status', '1'));
 		$partner_list = $partners_partner_handler->getList($criteria);
-		$partner_count = count($partner_list);
-		
-		// Select random partners for display
-		$random_ids = array();
-		for ($i = 0; $i < $options[0]; $i++)
-		{
-			$random_ids[] = mt_rand(1, $partner_count);
-		}
-		$criteria->add(new icms_db_criteria_Item('partner_id', '(' . implode(',', $random_ids) . ')', 'IN'));
-		$block['random_partners'] = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
+		$partner_list = array_flip($partner_list);
 	}
+	
+	// Pick random partners from the list, if the block preference is so set
+	if ($options[2] == TRUE) 
+	{
+		shuffle($partner_list);
+	}
+	
+	// Cut the partner list down to the number of required entries and set the IDs as criteria
+	$partner_list = array_slice($partner_list, 0, $options[0], TRUE);
+	$criteria->add(new icms_db_criteria_Item('partner_id', '(' . implode(',', $partner_list) . ')', 'IN'));
+			
+	// Retrieve the partners and assign them to the block - need to shuffle a second time
+	$partners = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
+	shuffle($partners);
+	$block['random_partners'] = $partners;
 
 	return $block;
 }
@@ -77,7 +102,7 @@ function edit_random_partners($options)
 	// Select number of random partners to display in the block
 	$form = '<table><tr>';
 	$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_LIMIT . '</td>';
-	$form .= '<td>' . '<input type="text" name="options[]" value="' . $options[0] . '"/></td>';
+	$form .= '<td>' . '<input type="text" name="options[0]" value="' . $options[0] . '"/></td>';
 	
 	// Optionally display results from a single tag - but only if sprockets module is installed
 	$sprocketsModule = icms_getModuleInfo('sprockets');
@@ -86,7 +111,7 @@ function edit_random_partners($options)
 		$sprockets_tag_handler = icms_getModuleHandler('tag', $sprocketsModule->getVar('dirname'), 'sprockets');
 		$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_TAG . '</td>';
 		// Parameters XoopsFormSelect: ($caption, $name, $value = null, $size = 1, $multiple = false)
-		$form_select = new XoopsFormSelect('', 'options[]', $options[1], '1', FALSE);
+		$form_select = new XoopsFormSelect('', 'options[1]', $options[1], '1', FALSE);
 		$tagList = $sprockets_tag_handler->getList();
 		$tagList = array(0 => _MB_PARTNERS_RANDOM_ALL) + $tagList;
 		$form_select->addOptionArray($tagList);
@@ -95,8 +120,8 @@ function edit_random_partners($options)
 	
 	// Randomise the partners? NB: Only works if you do not cache the block
 	$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_OR_FIXED . '</td>';
-	$form .= '<td><input type="radio" name="options[1]" value="1"';
-	if ($options[1] == 1) 
+	$form .= '<td><input type="radio" name="options[2]" value="1"';
+	if ($options[2] == 1) 
 	{
 		$form .= ' checked="checked"';
 	}
