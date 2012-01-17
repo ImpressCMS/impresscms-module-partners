@@ -83,8 +83,17 @@ $modversion['templates'] = array(
 	array('file' => 'partners_footer.html', 'description' => 'Module footer.'),
 	array('file' => 'partners_requirements.html', 'description' => 'Alert if module requirements not met.'));
 
-/** Blocks information */
-/** To come soon in imBuilding... */
+/** Blocks */
+
+$modversion['blocks'][1] = array(
+	'file' => 'random_partners.php',
+	'name' => _MI_PARTNERS_RANDOM,
+	'description' => _MI_PARTNERS_RANDOMDSC,
+	'show_func' => 'show_random_partners',
+	'edit_func' => 'edit_random_partners',
+	'options' => '5|0|0',
+	'template' => 'partners_block_random.html'
+);
 
 /** Preferences */
 $modversion['config'][1] = array(

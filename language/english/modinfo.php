@@ -17,6 +17,10 @@ define("_MI_PARTNERS_MD_DESC", "ImpressCMS Simple partners");
 define("_MI_PARTNERS_PARTNERS", "Partners");
 define("_MI_PARTNERS_TEMPLATES", "Templates");
 
+// Blocks
+define("_MI_PARTNERS_RANDOM", "Random partners");
+define("_MI_PARTNERS_RANDOMDSC", "Display random partners");
+
 // Preferences
 define("_MI_PARTNERS_INDEX_DISPLAY_MODE", "Display index as list of summaries");
 define("_MI_PARTNERS_INDEX_DISPLAY_MODE_DSC", "Toggles the display of the index page between a list of summaries (yes) and a compact list of tables (no).");
