@@ -31,7 +31,7 @@ function show_random_partners($options)
 	$criteria = new icms_db_criteria_Compo();
 	$partnerList = $partners = array();
 
-	// Get a list of partners filtered by tag and count them
+	// Get a list of partners filtered by tag
 	if ($sprocketsModule && $options[1] != 0)
 	{
 		$query = "SELECT `partner_id` FROM " . $partners_partner_handler->table . ", "
@@ -81,8 +81,18 @@ function show_random_partners($options)
 	// Retrieve the partners and assign them to the block - need to shuffle a second time
 	$partners = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
 	shuffle($partners);
+	
+	// Adjust the logo paths
+	foreach ($partners as $key => &$object)
+	{
+		$object['logo'] = ICMS_URL . '/uploads/' . $partnersModule->getVar('dirname') . '/partner/' . $object['logo'];
+	}
+	
+	// Assign to template
 	$block['random_partners'] = $partners;
-
+	$block['show_logos'] = $options[3];
+	$block['logo_block_display_width'] = icms_getConfig('logo_block_display_width', $partnersModule->getVar('dirname'));
+	
 	return $block;
 }
 
@@ -132,6 +142,21 @@ function edit_random_partners($options)
 		$form .= 'checked="checked"';
 	}
 	$form .= '/>' . _MB_PARTNERS_RANDOM_NO . '</td></tr>';	
+	
+	// Show partner logos, or just a simple list?
+	$form .= '<tr><td>' . _MB_PARTNERS_LOGOS_OR_LIST . '</td>';
+	$form .= '<td><input type="radio" name="options[3]" value="1"';
+	if ($options[3] == 1) 
+	{
+		$form .= ' checked="checked"';
+	}
+	$form .= '/>' . _MB_PARTNERS_RANDOM_YES;
+	$form .= '<input type="radio" name="options[3]" value="0"';
+	if ($options[3] == 0) 
+	{
+		$form .= 'checked="checked"';
+	}
+	$form .= '/>' . _MB_PARTNERS_RANDOM_NO . '</td></tr>';
 	$form .= '</table>';
 	
 	return $form;

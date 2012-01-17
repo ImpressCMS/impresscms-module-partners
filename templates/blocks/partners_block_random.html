@@ -1,5 +1,15 @@
-<ul>
+<{if $block.show_logos == TRUE}>
 	<{foreach item = partner from = $block.random_partners}>
-		<li><{$partner.title}></li>
+		<{if $partner.logo}>
+			<div class="partners_random_logo" style="text-align: center; margin: 1em 0em 0em 0em;">
+				<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$block.logo_block_display_width height="999" fit="inside"}></a>
+			</div>
+		<{/if}>
 	<{/foreach}>
-</ul>
+<{else}>
+	<ul>
+		<{foreach item = partner from = $block.random_partners}>
+			<li><a href="<{$partner.itemUrl}>"><{$partner.title}></a></li>
+		<{/foreach}>
+	</ul>
+<{/if}>

@@ -40,6 +40,8 @@ define("_MI_PARTNERS_LOGO_INDEX_DISPLAY_WIDTH", "Logo display width on the INDEX
 define("_MI_PARTNERS_LOGO_INDEX_DISPLAY_WIDTH_DSC", "Partner logos will be dynamically resized according to this value. You can change the value any time you like. However, you should upload logos that are slightly LARGER than the maximum desired display size to avoid pixelation due to upscaling.");
 define("_MI_PARTNERS_LOGO_SINGLE_DISPLAY_WIDTH", "Logo display width in SINGLE view (pixels)");
 define("_MI_PARTNERS_LOGO_SINGLE_DISPLAY_WIDTH_DSC", "Partner logos will be dynamically resized according to this value. You can change the value any time you like. However, you should upload logos that are slightly LARGER than the maximum desired display size to avoid pixelation due to upscaling.");
+define("_MI_PARTNERS_LOGO_BLOCK_DISPLAY_WIDTH", "Logo display width in the Random Partners block (pixels)");
+define("_MI_PARTNERS_LOGO_BLOCK_DISPLAY_WIDTH_DSC", "Partner logos will be dynamically resized according to this value. You can change the value any time you like. However, you should upload logos that are slightly LARGER than the maximum desired display size to avoid pixelation due to upscaling.");
 define("_MI_PARTNERS_LOGO_UPLOAD_HEIGHT", "Maximum height of logo files (pixels)");
 define("_MI_PARTNERS_LOGO_UPLOAD_HEIGHT_DSC", "Logo files may not exceed this value.");
 define("_MI_PARTNERS_LOGO_UPLOAD_WIDTH", "Maximum width of logo files (pixels)");

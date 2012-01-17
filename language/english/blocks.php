@@ -16,5 +16,6 @@ define("_MB_PARTNERS_RANDOM_ALL", "All");
 define("_MB_PARTNERS_RANDOM_TAG", "Sort partners by tag");
 define("_MB_PARTNERS_RANDOM_LIMIT", "Number of partners to show in block");
 define("_MB_PARTNERS_RANDOM_OR_FIXED", "Randomise? (Do not cache the block!)");
+define("_MB_PARTNERS_LOGOS_OR_LIST", "Show partner logos in block?");
 define("_MB_PARTNERS_RANDOM_YES", "Yes");
 define("_MB_PARTNERS_RANDOM_NO", "No");

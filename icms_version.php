@@ -91,7 +91,7 @@ $modversion['blocks'][1] = array(
 	'description' => _MI_PARTNERS_RANDOMDSC,
 	'show_func' => 'show_random_partners',
 	'edit_func' => 'edit_random_partners',
-	'options' => '5|0|0',
+	'options' => '5|0|0|1',
 	'template' => 'partners_block_random.html'
 );
 
@@ -168,6 +168,14 @@ $modversion['config'][] = array(
   'formtype' => 'text',
   'valuetype' => 'int',
   'default' =>  '300');
+
+$modversion['config'][] = array(
+  'name' => 'logo_block_display_width',
+  'title' => '_MI_PARTNERS_LOGO_BLOCK_DISPLAY_WIDTH',
+  'description' => '_MI_PARTNERS_LOGO_BLOCK_DISPLAY_WIDTH_DSC',
+  'formtype' => 'text',
+  'valuetype' => 'int',
+  'default' =>  '150');
 
 $modversion['config'][] = array(
 	'name' => 'logo_upload_height',
