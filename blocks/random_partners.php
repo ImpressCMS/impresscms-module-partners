@@ -26,7 +26,10 @@ function show_random_partners($options)
 	$sprocketsModule = icms_getModuleInfo('sprockets');
 	include_once(ICMS_ROOT_PATH . '/modules/' . $partnersModule->getVar('dirname') . '/include/common.php');
 	$partners_partner_handler = icms_getModuleHandler('partner', $partnersModule->getVar('dirname'), 'partners');
-	$sprockets_taglink_handler = icms_getModuleHandler('taglink', $sprocketsModule->getVar('dirname'), 'sprockets');
+	if ($sprocketsModule)
+	{
+		$sprockets_taglink_handler = icms_getModuleHandler('taglink', $sprocketsModule->getVar('dirname'), 'sprockets');
+	}
 	
 	$criteria = new icms_db_criteria_Compo();
 	$partnerList = $partners = array();
