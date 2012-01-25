@@ -133,7 +133,7 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 		if ($sprocketsModule) {
 			$sprockets_taglink_handler = icms_getModuleHandler('taglink',
 					$sprocketsModule->getVar('dirname'), 'sprockets');
-			$sprockets_taglink_handler->deleteAllForObject(&$obj);
+			$sprockets_taglink_handler->deleteAllForObject($obj);
 		}
 
 		return true;
