@@ -65,7 +65,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		if ($sprocketsModule)
 		{
 			$this->setControl('tag', array(
-			'name' => 'select_multi',
+			'name' => 'selectmulti',
 			'itemHandler' => 'tag',
 			'method' => 'getTags',
 			'module' => 'sprockets'));
