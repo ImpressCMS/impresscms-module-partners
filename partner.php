@@ -33,7 +33,6 @@ $document_root = str_replace('modules/' . $directory_name . '/partner.php', '', 
 // Assign common logo preferences to template
 $icmsTpl->assign('display_partner_logos', icms::$module->config['display_partner_logos']);
 $icmsTpl->assign('freestyle_logo_dimensions', icms::$module->config['freestyle_logo_dimensions']);
-$icmsTpl->assign('logo_display_width', icms::$module->config['logo_index_display_width']);
 if (icms::$module->config['partner_logo_position'] == 1) // Align right
 {
 	$icmsTpl->assign('partner_logo_position', 'partners_float_right');
@@ -55,6 +54,10 @@ if($partnerObj && !$partnerObj->isNew())
 		$partner['logo'] = $document_root . 'uploads/' . $directory_name . '/partner/' . $partner['logo'];
 	}
 	
+	// Set logo width
+	$icmsTpl->assign('logo_display_width', icms::$module->config['logo_single_display_width']);
+	
+	// Assign partner to template
 	$icmsTpl->assign("partners_partner", $partner);
 
 	$icms_metagen = new icms_ipf_Metagen($partnerObj->getVar("title"), $partnerObj->getVar("meta_keywords", "n"), $partnerObj->getVar("meta_description", "n"));
@@ -134,7 +137,6 @@ else
 			{
 				echo 'Error';
 				exit;
-				
 			}
 			else
 			{
@@ -144,7 +146,6 @@ else
 					{
 						$partner_count = $count;
 					}
-					
 				}
 			}
 
@@ -165,11 +166,9 @@ else
 			{
 				echo 'Error';
 				exit;
-				
 			}
 			else
 			{
-
 				$rows = $partners_partner_handler->convertResultSet($result, TRUE, FALSE);
 				foreach ($rows as $key => $row) 
 				{
@@ -202,6 +201,11 @@ else
 			$partner['logo'] = $document_root . 'uploads/' . $directory_name . '/partner/'
 				. $partner['logo'];
 		}
+		
+		// Set logo display width
+		$icmsTpl->assign('logo_display_width', icms::$module->config['logo_index_display_width']);
+		
+		// Assign partners to template
 		$icmsTpl->assign('partner_summaries', $partner_summaries);
 		
 		// Adjust pagination for tag, if present
