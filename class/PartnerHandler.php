@@ -34,14 +34,14 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 	{
 		$visibility = '';
 		$partnerObj = $this->get($id);
-		if ($partnerObj->getVar('online_status', 'e') == true) {
+		if ($partnerObj->getVar('online_status', 'e') == TRUE) {
 			$partnerObj->setVar('online_status', 0);
 			$visibility = 0;
 		} else {
 			$partnerObj->setVar('online_status', 1);
 			$visibility = 1;
 		}
-		$this->insert($partnerObj, true);
+		$this->insert($partnerObj, TRUE);
 		
 		return $visibility;
 	}
@@ -92,9 +92,9 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 			$criteria->add($criteriaKeywords);
 		}
 		
-		$criteria->add(new icms_db_criteria_Item('online_status', true));
+		$criteria->add(new icms_db_criteria_Item('online_status', TRUE));
 		
-		return $this->getObjects($criteria, true, true);
+		return $this->getObjects($criteria, TRUE, TRUE);
 	}
 	
 	/**
@@ -115,7 +115,7 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 			$sprockets_taglink_handler->storeTagsForObject($obj);
 		}
 
-		return true;
+		return TRUE;
 	}
 	
 	/**
@@ -138,6 +138,6 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 			$sprockets_taglink_handler->deleteAllForObject($obj);
 		}
 
-		return true;
+		return TRUE;
 	}
 }

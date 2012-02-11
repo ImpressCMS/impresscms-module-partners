@@ -27,7 +27,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		$this->quickInitVar("title", XOBJ_DTYPE_TXTBOX, TRUE);
 		$this->quickInitVar("logo", XOBJ_DTYPE_IMAGE, FALSE);
 		$this->quickInitVar("website", XOBJ_DTYPE_TXTBOX, FALSE);
-		$this->initNonPersistableVar('tag', XOBJ_DTYPE_INT, 'tag', false, false, false, true);
+		$this->initNonPersistableVar('tag', XOBJ_DTYPE_INT, 'tag', FALSE, FALSE, FALSE, TRUE);
 		$this->quickInitVar("description", XOBJ_DTYPE_TXTAREA, TRUE);
 		$this->quickInitVar("extended_text", XOBJ_DTYPE_TXTAREA, FALSE);
 		$this->quickInitVar("contact_name", XOBJ_DTYPE_TXTBOX, FALSE);
@@ -116,7 +116,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 	public function online_status()
 	{
 		$online_status = $this->getVar('online_status', 'e');
-		if ($online_status == false) 
+		if ($online_status == FALSE) 
 		{
 			return '<a href="' . ICMS_URL . '/modules/' . basename(dirname(dirname(__FILE__)))
 				. '/admin/partner.php?partner_id=' . $this->getVar('partner_id') . '&amp;op=visible">

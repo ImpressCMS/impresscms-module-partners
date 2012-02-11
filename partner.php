@@ -96,7 +96,7 @@ else
 					$sprocketsModule->getVar('dirname'), 'sprockets');
 
 			// Prepare buffer to reduce queries
-			$tag_buffer = $sprockets_tag_handler->getObjects(null, true, false);
+			$tag_buffer = $sprockets_tag_handler->getObjects(null, TRUE, false);
 
 			// Append the tag to the breadcrumb title
 			if (array_key_exists($clean_tag_id, $tag_buffer) && ($clean_tag_id !== 0)) {
@@ -106,7 +106,7 @@ else
 			}
 
 			// Load the tag navigation select box
-			// $action, $selected = null, $zero_option_message = '---', $navigation_elements_only = true, $module_id = null, $item = null
+			// $action, $selected = null, $zero_option_message = '---', $navigation_elements_only = TRUE, $module_id = null, $item = null
 			$tag_select_box = $sprockets_tag_handler->getTagSelectBox('partner.php', $clean_tag_id,
 					_CO_PARTNERS_PARTNER_ALL_TAGS, TRUE, icms::$module->getVar('mid'));
 			$icmsTpl->assign('partners_tag_select_box', $tag_select_box);
