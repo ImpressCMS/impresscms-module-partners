@@ -19,17 +19,17 @@
 */
 function editpartner($partner_id = 0)
 {
-	global $partners_partner_handler, $icmsModule, $icmsAdminTpl;
+	global $partners_partner_handler, $icmsAdminTpl;
 
 	$partnerObj = $partners_partner_handler->get($partner_id);
 
 	if (!$partnerObj->isNew()){
 		$partnerObj->loadTags();
-		$icmsModule->displayAdminMenu(0, _AM_PARTNERS_PARTNERS . " > " . _CO_ICMS_EDITING);
+		icms::$module->displayAdminMenu(0, _AM_PARTNERS_PARTNERS . " > " . _CO_ICMS_EDITING);
 		$sform = $partnerObj->getForm(_AM_PARTNERS_PARTNER_EDIT, "addpartner");
 		$sform->assign($icmsAdminTpl);
 	} else {
-		$icmsModule->displayAdminMenu(0, _AM_PARTNERS_PARTNERS . " > " . _CO_ICMS_CREATINGNEW);
+		icms::$module->displayAdminMenu(0, _AM_PARTNERS_PARTNERS . " > " . _CO_ICMS_CREATINGNEW);
 		$sform = $partnerObj->getForm(_AM_PARTNERS_PARTNER_CREATE, "addpartner");
 		$sform->assign($icmsAdminTpl);
 
@@ -117,7 +117,7 @@ if (in_array($clean_op, $valid_op, TRUE))
 
 		default:
 			icms_cp_header();
-			$icmsModule->displayAdminMenu(0, _AM_PARTNERS_PARTNERS);
+			icms::$module->displayAdminMenu(0, _AM_PARTNERS_PARTNERS);
 			
 			// Display a single project, if a project_id is set
 			if ($clean_project_id)

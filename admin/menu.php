@@ -20,7 +20,7 @@ $module = icms::handler("icms_module")->getByDirname(basename(dirname(dirname(__
 
 $headermenu[] = array(
 	"title" => _CO_ICMS_GOTOMODULE,
-	"link" => ICMS_URL . "/modules/partners/");
+	"link" => ICMS_URL . "/modules/" . $module->getVar("dirname") . "/");
 $headermenu[] = array(
 	"title" => _PREFERENCES,
 	"link" => "../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $module->getVar("mid"));
@@ -33,6 +33,6 @@ $headermenu[] = array(
 	"link" => ICMS_URL . "/modules/system/admin.php?fct=modulesadmin&amp;op=update&amp;module=" . basename(dirname(dirname(__FILE__))));
 $headermenu[] = array(
 	"title" => _MODABOUT_ABOUT,
-	"link" => ICMS_URL . "/modules/partners/admin/about.php");
+	"link" => ICMS_URL . "/modules/" . $module->getVar("dirname") . "/admin/about.php");
 
 unset($module_handler);
