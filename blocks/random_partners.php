@@ -44,7 +44,7 @@ function show_random_partners($options)
 			. " AND `mid` = '" . $partnersModule->getVar('mid') . "'"
 			. " AND `item` = 'partner'"
 			. " AND `online_status` = '1'"
-			. " ORDER BY `date` DESC";
+			. " ORDER BY `weight` ASC";
 
 		$result = icms::$xoopsDB->query($query);
 
@@ -67,6 +67,8 @@ function show_random_partners($options)
 	else 
 	{
 		$criteria->add(new icms_db_criteria_Item('online_status', '1'));
+		$criteria->setSort('weight');
+		$criteria->setOrder('ASC');
 		$partner_list = $partners_partner_handler->getList($criteria);
 		$partner_list = array_flip($partner_list);
 	}
@@ -123,8 +125,8 @@ function edit_random_partners($options)
 	{
 		$sprockets_tag_handler = icms_getModuleHandler('tag', $sprocketsModule->getVar('dirname'), 'sprockets');
 		$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_TAG . '</td>';
-		// Parameters XoopsFormSelect: ($caption, $name, $value = null, $size = 1, $multiple = false)
-		$form_select = new XoopsFormSelect('', 'options[1]', $options[1], '1', FALSE);
+		// Parameters icms_form_elements_Select: ($caption, $name, $value = null, $size = 1, $multiple = false)
+		$form_select = new icms_form_elements_Select('', 'options[1]', $options[1], '1', FALSE);
 		$tagList = $sprockets_tag_handler->getList();
 		$tagList = array(0 => _MB_PARTNERS_RANDOM_ALL) + $tagList;
 		$form_select->addOptionArray($tagList);

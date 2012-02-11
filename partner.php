@@ -157,7 +157,7 @@ else
 					. " AND `tid` = '" . $clean_tag_id . "'"
 					. " AND `mid` = '" . icms::$module->getVar('mid') . "'"
 					. " AND `item` = 'partner'"
-					. " ORDER BY `date` DESC"
+					. " ORDER BY `weight` ASC"
 					. " LIMIT " . $clean_start . ", " . icms::$module->config['number_of_partners_per_page'];
 
 			$result = icms::$xoopsDB->query($query);
@@ -189,7 +189,7 @@ else
 			// Continue to retrieve partners for this page view
 			$criteria->setStart($clean_start);
 			$criteria->setLimit(icms::$module->config['number_of_partners_per_page']);
-			$criteria->setSort('title');
+			$criteria->setSort('weight');
 			$criteria->setOrder('ASC');
 			$partner_summaries = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
 		}
@@ -228,6 +228,8 @@ else
 		// View partners in compact table
 		$criteria = new icms_db_criteria_Compo();
 		$criteria->add(new icms_db_criteria_Item('online_status', TRUE));
+		$criteria->setSort('weight');
+		$criteria->setOrder('ASC');
 		$objectTable = new icms_ipf_view_Table($partners_partner_handler, $criteria, array());
 		$objectTable->isForUserSide();
 		$objectTable->addColumn(new icms_ipf_view_Column("title"));
