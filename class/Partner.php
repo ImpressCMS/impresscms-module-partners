@@ -120,13 +120,13 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		{
 			return '<a href="' . ICMS_URL . '/modules/' . basename(dirname(dirname(__FILE__)))
 				. '/admin/partner.php?partner_id=' . $this->getVar('partner_id') . '&amp;op=visible">
-				<img src="../images/button_cancel.png" alt="Offline" /></a>';
+				<img src="' . ICMS_IMAGES_SET_URL . '/actions/button_cancel.png" alt="' . _INVISIBLE . '" /></a>';
 		}
 		else
 		{
 			return '<a href="' . ICMS_URL . '/modules/' . basename(dirname(dirname(__FILE__)))
 				. '/admin/partner.php?partner_id=' . $this->getVar('partner_id') . '&amp;op=visible">
-				<img src="../images/button_ok.png" alt="Online" /></a>';
+				<img src="' . ICMS_IMAGES_SET_URL . '/actions/button_ok.png" alt="' . _VISIBLE . '" /></a>';
 		}
 	}
 	

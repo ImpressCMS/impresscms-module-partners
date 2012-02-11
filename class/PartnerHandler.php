@@ -108,7 +108,8 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 		$sprockets_taglink_handler = '';
 		$sprocketsModule = icms_getModuleInfo('sprockets');
 		
-		if ($sprocketsModule) {
+		if ($_SERVER['REQUEST_METHOD'] == 'POST' && icms_get_module_status("sprockets")) 
+		{
 			$sprockets_taglink_handler = icms_getModuleHandler('taglink', 
 					$sprocketsModule->getVar('dirname'), 'sprockets');
 			$sprockets_taglink_handler->storeTagsForObject($obj);
@@ -130,7 +131,8 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 		
 		$sprocketsModule = icms_getModuleInfo('sprockets');
 		
-		if ($sprocketsModule) {
+		if (icms_get_module_status("sprockets"))
+		{
 			$sprockets_taglink_handler = icms_getModuleHandler('taglink',
 					$sprocketsModule->getVar('dirname'), 'sprockets');
 			$sprockets_taglink_handler->deleteAllForObject($obj);
