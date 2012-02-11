@@ -62,7 +62,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		
 		// Only display the tag field if the sprockets module is installed
 		$sprocketsModule = icms_getModuleInfo('sprockets');
-		if ($sprocketsModule)
+		if (icms_get_module_status("sprockets"))
 		{
 			$this->setControl('tag', array(
 			'name' => 'selectmulti',
@@ -140,7 +140,7 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 		$ret = '';
 		
 		$sprocketsModule = icms_getModuleInfo('sprockets');
-		if ($sprocketsModule) {
+		if (icms_get_module_status("sprockets")) {
 			$sprockets_taglink_handler = icms_getModuleHandler('taglink',
 					$sprocketsModule->getVar('dirname'), 'sprockets');
 			$ret = $sprockets_taglink_handler->getTagsForObject($this->id(), $this->handler);

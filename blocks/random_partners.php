@@ -26,7 +26,7 @@ function show_random_partners($options)
 	$sprocketsModule = icms_getModuleInfo('sprockets');
 	include_once(ICMS_ROOT_PATH . '/modules/' . $partnersModule->getVar('dirname') . '/include/common.php');
 	$partners_partner_handler = icms_getModuleHandler('partner', $partnersModule->getVar('dirname'), 'partners');
-	if ($sprocketsModule)
+	if (icms_get_module_status("sprockets"))
 	{
 		$sprockets_taglink_handler = icms_getModuleHandler('taglink', $sprocketsModule->getVar('dirname'), 'sprockets');
 	}
@@ -35,7 +35,7 @@ function show_random_partners($options)
 	$partnerList = $partners = array();
 
 	// Get a list of partners filtered by tag
-	if ($sprocketsModule && $options[1] != 0)
+	if (icms_get_module_status("sprockets") && $options[1] != 0)
 	{
 		$query = "SELECT `partner_id` FROM " . $partners_partner_handler->table . ", "
 			. $sprockets_taglink_handler->table
@@ -121,7 +121,7 @@ function edit_random_partners($options)
 	
 	// Optionally display results from a single tag - but only if sprockets module is installed
 	$sprocketsModule = icms_getModuleInfo('sprockets');
-	if ($sprocketsModule)
+	if (icms_get_module_status("sprockets"))
 	{
 		$sprockets_tag_handler = icms_getModuleHandler('tag', $sprocketsModule->getVar('dirname'), 'sprockets');
 		$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_TAG . '</td>';

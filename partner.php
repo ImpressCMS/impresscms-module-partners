@@ -135,7 +135,7 @@ else
 	if (icms::$module->config['index_display_mode'] == TRUE)
 	{		
 		// Retrieve partners for a given tag
-		if ($clean_tag_id && $sprocketsModule)
+		if ($clean_tag_id && icms_get_module_status("sprockets"))
 		{
 			/**
 			 * Retrieve a list of partners JOINED to taglinks by partner_id/tag_id/module_id/item
