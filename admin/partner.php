@@ -22,6 +22,7 @@ function editpartner($partner_id = 0)
 	global $partners_partner_handler, $icmsAdminTpl;
 
 	$partnerObj = $partners_partner_handler->get($partner_id);
+	$sprocketsModule = icms::handler("icms_module")->getByDirname("sprockets");
 
 	if (!$partnerObj->isNew()){
 		$partnerObj->loadTags();
@@ -53,12 +54,6 @@ if (isset($_POST["op"])) $clean_op = htmlentities($_POST["op"]);
 $clean_partner_id = isset($_GET["partner_id"]) ? (int)$_GET["partner_id"] : 0 ;
 $clean_tag_id = isset($_GET['tag_id']) ? (int)$_GET['tag_id'] : 0 ;
 
-/**
- * in_array() is a native PHP function that will determine if the value of the
- * first argument is found in the array listed in the second argument. Strings
- * are case sensitive and the 3rd argument determines whether type matching is
- * required
-*/
 if (in_array($clean_op, $valid_op, TRUE))
 {
 	switch ($clean_op)
@@ -119,18 +114,18 @@ if (in_array($clean_op, $valid_op, TRUE))
 			icms_cp_header();
 			icms::$module->displayAdminMenu(0, _AM_PARTNERS_PARTNERS);
 			
-			// Display a single project, if a project_id is set
-			if ($clean_project_id)
+			// Display a single partner, if a partner_id is set
+			if ($clean_partner_id)
 			{
-				$projectObj = $projects_project_handler->get($clean_project_id);
-				$projectObj->displaySingleObject();
+				$partnerObj = $partners_partner_handler->get($clean_partner_id);
+				$partnerObj->displaySingleObject();
 			}
 			
 			$criteria = '';
 			
 			// Display a tag select filter (if the Sprockets module is installed)
-			if (icms_get_module_status("sprockets")) {
-
+			if (icms_get_module_status("sprockets"))
+			{
 				$tag_select_box = '';
 				$taglink_array = $tagged_partner_list = array();
 				$sprockets_tag_handler = icms_getModuleHandler('tag', 'sprockets', 'sprockets');
@@ -144,9 +139,9 @@ if (in_array($clean_op, $valid_op, TRUE))
 					echo $tag_select_box;
 				}
 
-				if ($clean_tag_id) {
-
-					// get a list of project IDs belonging to this tag
+				if ($clean_tag_id)
+				{
+					// Get a list of partner IDs belonging to this tag
 					$criteria = new icms_db_criteria_Compo();
 					$criteria->add(new icms_db_criteria_Item('tid', $clean_tag_id));
 					$criteria->add(new icms_db_criteria_Item('mid', icms::$module->getVar('mid')));
@@ -168,6 +163,7 @@ if (in_array($clean_op, $valid_op, TRUE))
 			}			
 			
 			$objectTable = new icms_ipf_view_Table($partners_partner_handler, $criteria);
+			$objectTable->addQuickSearch('title');
 			$objectTable->addColumn(new icms_ipf_view_Column("online_status"));
 			$objectTable->addColumn(new icms_ipf_view_Column("title"));
 			$objectTable->addColumn(new icms_ipf_view_Column('weight', 'center', TRUE, 'getWeightControl'));

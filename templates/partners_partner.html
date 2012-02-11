@@ -72,17 +72,18 @@
 	</div>
 <{/if}>
 
+<!-- Tag select box - index page only -->
+<{if $partner_summaries || $partners_partner_table}>
+	<div>
+		<{if $partners_show_tag_select_box}>
+			<{$partners_show_tag_select_box}>
+		<{/if}>
+	</div>
+<{/if}>
+
 <!-- View partner index in summary mode -->
 <{if $partner_summaries}>
-	<div>
-		
-		<!-- Tag select box -->
-		<div>
-			<{if $partners_tag_select_box}>
-				<{$partners_tag_select_box}>
-			<{/if}>
-		</div>
-		
+	<div>		
 		<!-- Pagination control -->
 		<div>
 			<{if $partners_navbar }><{$partners_navbar}><{/if}>

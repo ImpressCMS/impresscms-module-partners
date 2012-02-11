@@ -113,7 +113,7 @@ $modversion['config'][] = array(
   'default' =>  '5');
 
 $modversion['config'][] = array(
-	'name' => 'show_breadcrumb',
+	'name' => 'partners_show_breadcrumb',
 	'title' => '_MI_PARTNERS_SHOW_BREADCRUMB',
 	'description' => '_MI_PARTNERS_SHOW_BREADCRUMB_DSC',
 	'formtype' => 'yesno',
@@ -121,7 +121,7 @@ $modversion['config'][] = array(
 	'default' => '1');
 
 $modversion['config'][] = array(
-	'name' => 'show_tag_select_box',
+	'name' => 'partners_show_tag_select_box',
 	'title' => '_MI_PARTNERS_SHOW_TAG_SELECT_BOX',
 	'description' => '_MI_PARTNERS_SHOW_TAG_SELECT_BOX_DSC',
 	'formtype' => 'yesno',

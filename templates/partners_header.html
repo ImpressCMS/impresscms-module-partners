@@ -9,5 +9,9 @@
 			<{/if}>
 	</div>
 <{else}>
-	<h1><{$smarty.const._CO_PARTNERS_PARTNERS}></h1>
+	<{if $partners_page_title}>
+		<h1>
+			<{$partners_page_title}><{if $partners_tag_name}> - <{$partners_tag_name}><{/if}>
+		</h1>
+	<{/if}>
 <{/if}>
