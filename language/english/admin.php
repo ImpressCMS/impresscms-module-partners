@@ -35,3 +35,5 @@ define("_AM_PARTNERS_PARTNER_ONLINE", "Online");
 define("_AM_PARTNERS_PARTNER_OFFLINE", "Offline");
 define("_AM_PARTNERS_PARTNER_VISIBLE", "Partner switched online");
 define("_AM_PARTNERS_PARTNER_INVISIBLE", "Partner switched offline");
+define("_AM_PARTNERS_PARTNER_ALL_PARTNERS", "-- All partners --");
+define("_AM_PARTNERS_PARTNER_FILTER_BY_TAG", "Filter by tag");
