@@ -102,6 +102,9 @@ if($partnerObj && !$partnerObj->isNew())
 		$partner['tags'] = implode(', ', $partner['tags']);
 	}
 	
+	// Set page title
+	$icmsTpl->assign("partners_page_title", _CO_PARTNERS_PARTNERS);
+	
 	// Assign partner to template
 	$icmsTpl->assign("partners_partner", $partner);
 
