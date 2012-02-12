@@ -30,6 +30,8 @@ define("_MI_PARTNERS_SHOW_TAG_SELECT_BOX", "Show tag select box");
 define("_MI_PARTNERS_SHOW_TAG_SELECT_BOX_DSC", "Toggles the tag select box on/off for the partners index page (only if Sprockets module installed).");
 define("_MI_PARTNERS_SHOW_BREADCRUMB", "Show breadcrumb");
 define("_MI_PARTNERS_SHOW_BREADCRUMB_DSC", "Toggles the module breadcrumb on/off");
+define("_MI_PARTNERS_SHOW_COUNTER", "Show counter?");
+define("_MI_PARTNERS_SHOW_COUNTER_DSC", "Toggles the counter field on or off");
 define("_MI_PARTNERS_DISPLAY_PARTNER_LOGOS", "Display partner logos");
 define("_MI_PARTNERS_DISPLAY_PARTNER_LOGOS_DSC", "Toggles logos on or off.");
 define("_MI_PARTNERS_PARTNER_LOGO_POSITION", "Logo position");

@@ -48,6 +48,8 @@ define("_CO_PARTNERS_PARTNER_WEIGHT", "Weight");
 define("_CO_PARTNERS_PARTNER_WEIGHT_DSC", "Controls the sorting order. Lower weights are listed first.");
 define("_CO_PARTNERS_PARTNER_ONLINE_STATUS", "Online status");
 define("_CO_PARTNERS_PARTNER_ONLINE_STATUS_DSC", "Set this partner online (yes) or offline (no).");
+define("_CO_PARTNERS_PARTNER_VIEWS", "views");
 
 // Tag select box
 define("_CO_PARTNERS_PARTNER_ALL_TAGS", "-- All --");
+define("_CO_PARTNERS_PARTNER_TAGS", "Tags");

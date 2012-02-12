@@ -82,8 +82,12 @@ if($partnerObj && !$partnerObj->isNew())
 		$partner['logo'] = $document_root . 'uploads/' . $directory_name . '/partner/' . $partner['logo'];
 	}
 	
-	// Set logo width
+	// Set some preferences
 	$icmsTpl->assign('logo_display_width', icms::$module->config['logo_single_display_width']);
+	if (icms::$module->config['partners_show_counter'] == FALSE)
+	{
+		unset($partner['counter']);
+	}
 	
 	// Prepare tags for display
 	if (icms_get_module_status("sprockets"))

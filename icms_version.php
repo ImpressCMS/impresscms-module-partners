@@ -20,7 +20,7 @@ $modversion = array(
 	"version"					=> 1.0,
 	"description"				=> _MI_PARTNERS_MD_DESC,
 	"author"					=> "Madfish (Simon Wilkinson)",
-	"credits"					=> "",
+	"credits"					=> "Module icon by Corey Marion.",
 	"help"						=> "",
 	"license"					=> "GNU General Public License (GPL)",
 	"official"					=> 0,
@@ -129,6 +129,14 @@ $modversion['config'][] = array(
 	'default' => '1');
 
 $modversion['config'][] = array(
+	'name' => 'partners_show_counter',
+	'title' => '_MI_PARTNERS_SHOW_COUNTER',
+	'description' => '_MI_PARTNERS_SHOW_COUNTER_DSC',
+	'formtype' => 'yesno',
+	'valuetype' => 'int',
+	'default' => '1');
+
+$modversion['config'][] = array(
 	'name' => 'display_partner_logos',
 	'title' => '_MI_PARTNERS_DISPLAY_PARTNER_LOGOS',
 	'description' => '_MI_PARTNERS_DISPLAY_PARTNER_LOGOS_DSC',
@@ -143,7 +151,7 @@ $modversion['config'][] = array(
 	'formtype' => 'select',
 	'valuetype' => 'int',
 	'options' => array('_MI_PARTNERS_LEFT' => 0, '_MI_PARTNERS_RIGHT' => 1),
-	'default' => 'Left');
+	'default' => '1');
 
 $modversion['config'][] = array(
 	'name' => 'freestyle_logo_dimensions',
