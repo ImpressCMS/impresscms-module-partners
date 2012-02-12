@@ -111,7 +111,6 @@ function edit_random_partners($options)
 {
 	$partnersModule = icms_getModuleInfo('partners');
 	include_once(ICMS_ROOT_PATH . '/modules/' . $partnersModule->getVar('dirname') . '/include/common.php');
-	include_once(ICMS_ROOT_PATH . '/class/xoopsform/formselect.php');
 	$partners_partner_handler = icms_getModuleHandler('partner', $partnersModule->getVar('dirname'), 'partners');
 	
 	// Select number of random partners to display in the block
@@ -119,22 +118,23 @@ function edit_random_partners($options)
 	$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_LIMIT . '</td>';
 	$form .= '<td>' . '<input type="text" name="options[0]" value="' . $options[0] . '"/></td>';
 	
-	// Optionally display results from a single tag - but only if sprockets module is installed
-	$sprocketsModule = icms_getModuleInfo('sprockets');
-	if (icms_get_module_status("sprockets"))
-	{
-		$sprockets_tag_handler = icms_getModuleHandler('tag', $sprocketsModule->getVar('dirname'), 'sprockets');
-		$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_TAG . '</td>';
-		// Parameters icms_form_elements_Select: ($caption, $name, $value = null, $size = 1, $multiple = false)
-		$form_select = new icms_form_elements_Select('', 'options[1]', $options[1], '1', FALSE);
-		$tagList = $sprockets_tag_handler->getList();
-		$tagList = array(0 => _MB_PARTNERS_RANDOM_ALL) + $tagList;
-		$form_select->addOptionArray($tagList);
-		$form .= '<td>' . $form_select->render() . '</td></tr>';
-	}
-	
 	// Randomise the partners? NB: Only works if you do not cache the block
 	$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_OR_FIXED . '</td>';
+	$form .= '<td><input type="radio" name="options[1]" value="1"';
+	if ($options[1] == 1) 
+	{
+		$form .= ' checked="checked"';
+	}
+	$form .= '/>' . _MB_PARTNERS_RANDOM_YES;
+	$form .= '<input type="radio" name="options[1]" value="0"';
+	if ($options[1] == 0) 
+	{
+		$form .= 'checked="checked"';
+	}
+	$form .= '/>' . _MB_PARTNERS_RANDOM_NO . '</td></tr>';	
+	
+	// Show partner logos, or just a simple list?
+	$form .= '<tr><td>' . _MB_PARTNERS_LOGOS_OR_LIST . '</td>';
 	$form .= '<td><input type="radio" name="options[2]" value="1"';
 	if ($options[2] == 1) 
 	{
@@ -146,22 +146,41 @@ function edit_random_partners($options)
 	{
 		$form .= 'checked="checked"';
 	}
-	$form .= '/>' . _MB_PARTNERS_RANDOM_NO . '</td></tr>';	
-	
-	// Show partner logos, or just a simple list?
-	$form .= '<tr><td>' . _MB_PARTNERS_LOGOS_OR_LIST . '</td>';
-	$form .= '<td><input type="radio" name="options[3]" value="1"';
-	if ($options[3] == 1) 
-	{
-		$form .= ' checked="checked"';
-	}
-	$form .= '/>' . _MB_PARTNERS_RANDOM_YES;
-	$form .= '<input type="radio" name="options[3]" value="0"';
-	if ($options[3] == 0) 
-	{
-		$form .= 'checked="checked"';
-	}
 	$form .= '/>' . _MB_PARTNERS_RANDOM_NO . '</td></tr>';
+	
+	// Optionally display results from a single tag - but only if sprockets module is installed
+	$sprocketsModule = icms::handler("icms_module")->getByDirname("sprockets");
+
+	if (icms_get_module_status("sprockets"))
+	{
+		$sprockets_tag_handler = icms_getModuleHandler('tag', $sprocketsModule->getVar('dirname'), 'sprockets');
+		$sprockets_taglink_handler = icms_getModuleHandler('taglink', $sprocketsModule->getVar('dirname'), 'sprockets');
+		
+		// Get only those tags that contain content from this module
+		$criteria = '';
+		$relevant_tag_ids = array();
+		$criteria = icms_buildCriteria(array('mid' => $partnersModule->getVar('mid')));
+		$partners_module_taglinks = $sprockets_taglink_handler->getObjects($criteria, TRUE, TRUE);
+		foreach ($partners_module_taglinks as $key => $value)
+		{
+			$relevant_tag_ids[] = $value->getVar('tid');
+		}
+		$relevant_tag_ids = array_unique($relevant_tag_ids);
+		$relevant_tag_ids = '(' . implode(',', $relevant_tag_ids) . ')';
+		unset($criteria);
+
+		$criteria = new icms_db_criteria_Compo();
+		$criteria->add(new icms_db_criteria_Item('tag_id', $relevant_tag_ids, 'IN'));
+		$tagList = $sprockets_tag_handler->getList($criteria);
+
+		$tagList = array(0 => _MB_PARTNERS_RANDOM_ALL) + $tagList;
+		$form .= '<tr><td>' . _MB_PARTNERS_RANDOM_TAG . '</td>';
+		// Parameters icms_form_elements_Select: ($caption, $name, $value = null, $size = 1, $multiple = TRUE)
+		$form_select = new icms_form_elements_Select('', 'options[3]', $options[3], '1', FALSE);
+		$form_select->addOptionArray($tagList);
+		$form .= '<td>' . $form_select->render() . '</td></tr>';
+	}
+	
 	$form .= '</table>';
 	
 	return $form;

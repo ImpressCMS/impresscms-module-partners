@@ -91,7 +91,7 @@ $modversion['blocks'][1] = array(
 	'description' => _MI_PARTNERS_RANDOMDSC,
 	'show_func' => 'show_random_partners',
 	'edit_func' => 'edit_random_partners',
-	'options' => '5|0|0|1',
+	'options' => '5|0|1|0',
 	'template' => 'partners_block_random.html'
 );
 
