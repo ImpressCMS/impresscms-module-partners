@@ -34,5 +34,8 @@ $headermenu[] = array(
 $headermenu[] = array(
 	"title" => _MODABOUT_ABOUT,
 	"link" => ICMS_URL . "/modules/" . $module->getVar("dirname") . "/admin/about.php");
+$headermenu[] = array(
+	"title" => _MI_PARTNERS_MANUAL,
+	"link" => ICMS_URL . "/modules/" . $module->getVar("dirname") . "/docs/partners_manual.pdf");
 
 unset($module_handler);

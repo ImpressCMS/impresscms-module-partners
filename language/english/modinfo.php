@@ -56,3 +56,6 @@ define("_MI_PARTNERS_DATE_FORMAT_DSC", "Controls the format of the date returned
 // Preference options
 define("_MI_PARTNERS_LEFT", "Left");
 define("_MI_PARTNERS_RIGHT", "Right");
+
+// Manual
+define("_MI_PARTNERS_MANUAL", "Manual");
