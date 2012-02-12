@@ -126,7 +126,7 @@ else
 	}
 	
 	// Set the page title
-	$icmsTpl->assign("partners_title", _MD_PARTNERS_ALL_PARTNERS);
+	$icmsTpl->assign("partners_page_title", _MD_PARTNERS_ALL_PARTNERS);
 	
 	///////////////////////////////////////////////////////////////////
 	////////// View projects as list of summary descriptions //////////
@@ -202,6 +202,9 @@ else
 		// Retrieve partners without filtering by tag
 		else
 		{
+			$criteria = new icms_db_criteria_Compo();
+			$criteria->add(new icms_db_criteria_Item('online_status', TRUE));
+			
 			// Count the number of online partners for the pagination control
 			$partner_count = $partners_partner_handler->getCount($criteria);
 
@@ -226,7 +229,7 @@ else
 		
 		// Assign partners to template
 		$icmsTpl->assign('partner_summaries', $partner_summaries);
-		
+
 		// Adjust pagination for tag, if present
 		if (!empty($clean_tag_id))
 		{
