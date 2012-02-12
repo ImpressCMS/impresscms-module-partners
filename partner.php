@@ -52,7 +52,7 @@ if (icms_get_module_status("sprockets"))
 
 // Assign common logo preferences to template
 $icmsTpl->assign('display_partner_logos', icms::$module->config['display_partner_logos']);
-$icmsTpl->assign('freestyle_logo_dimensions', icms::$module->config['freestyle_logo_dimensions']);
+$icmsTpl->assign('partners_freestyle_logo_dimensions', icms::$module->config['partners_freestyle_logo_dimensions']);
 if (icms::$module->config['partner_logo_position'] == 1) // Align right
 {
 	$icmsTpl->assign('partner_logo_position', 'partners_float_right');
@@ -83,7 +83,7 @@ if($partnerObj && !$partnerObj->isNew())
 	}
 	
 	// Set some preferences
-	$icmsTpl->assign('logo_display_width', icms::$module->config['logo_single_display_width']);
+	$icmsTpl->assign('partners_logo_display_width', icms::$module->config['partners_logo_single_display_width']);
 	if (icms::$module->config['partners_show_counter'] == FALSE)
 	{
 		unset($partner['counter']);
@@ -133,13 +133,13 @@ else
 	}
 	
 	// Set the page title
-	$icmsTpl->assign("partners_page_title", _MD_PARTNERS_ALL_PARTNERS);
+	$icmsTpl->assign("partners_page_title", _CO_PARTNERS_PARTNERS);
 	
 	///////////////////////////////////////////////////////////////////
-	////////// View projects as list of summary descriptions //////////
+	////////// View partners as list of summary descriptions //////////
 	///////////////////////////////////////////////////////////////////
 	
-	if (icms::$module->config['index_display_mode'] == TRUE)
+	if (icms::$module->config['partners_index_display_mode'] == TRUE)
 	{		
 		// Retrieve partners for a given tag
 		if ($clean_tag_id && icms_get_module_status("sprockets"))
@@ -232,7 +232,7 @@ else
 		}
 		
 		// Set logo display width
-		$icmsTpl->assign('logo_display_width', icms::$module->config['logo_index_display_width']);
+		$icmsTpl->assign('partners_logo_display_width', icms::$module->config['partners_logo_index_display_width']);
 		
 		// Assign partners to template
 		$icmsTpl->assign('partner_summaries', $partner_summaries);
@@ -255,14 +255,14 @@ else
 	else 
 	{
 		//////////////////////////////////////////////////////////////////////////////
-		////////// View projects in compact table, optionally filter by tag //////////
+		////////// View partners in compact table, optionally filter by tag //////////
 		//////////////////////////////////////////////////////////////////////////////
 		
 		$tagged_partner_list = '';
 		
 		if ($clean_tag_id && icms_get_module_status("sprockets")) 
 		{
-			// Get a list of project IDs belonging to this tag
+			// Get a list of partner IDs belonging to this tag
 			$criteria = new icms_db_criteria_Compo();
 			$criteria->add(new icms_db_criteria_Item('tid', $clean_tag_id));
 			$criteria->add(new icms_db_criteria_Item('mid', icms::$module->getVar('mid')));

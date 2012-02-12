@@ -97,7 +97,7 @@ $modversion['blocks'][1] = array(
 
 /** Preferences */
 $modversion['config'][1] = array(
-  'name' => 'index_display_mode',
+  'name' => 'partners_index_display_mode',
   'title' => '_MI_PARTNERS_INDEX_DISPLAY_MODE',
   'description' => '_MI_PARTNERS_INDEX_DISPLAY_MODE_DSC',
   'formtype' => 'yesno',
@@ -154,7 +154,7 @@ $modversion['config'][] = array(
 	'default' => '1');
 
 $modversion['config'][] = array(
-	'name' => 'freestyle_logo_dimensions',
+	'name' => 'partners_freestyle_logo_dimensions',
 	'title' => '_MI_PARTNERS_FREESTYLE_LOGO_DIMENSIONS',
 	'description' => '_MI_PARTNERS_FREESTYLE_LOGO_DIMENSIONS_DSC',
 	'formtype' => 'yesno',
@@ -162,7 +162,7 @@ $modversion['config'][] = array(
 	'default' => '0');
 
 $modversion['config'][] = array(
-  'name' => 'logo_index_display_width',
+  'name' => 'partners_logo_index_display_width',
   'title' => '_MI_PARTNERS_LOGO_INDEX_DISPLAY_WIDTH',
   'description' => '_MI_PARTNERS_LOGO_INDEX_DISPLAY_WIDTH_DSC',
   'formtype' => 'text',
@@ -170,7 +170,7 @@ $modversion['config'][] = array(
   'default' =>  '150');
 
 $modversion['config'][] = array(
-  'name' => 'logo_single_display_width',
+  'name' => 'partners_logo_single_display_width',
   'title' => '_MI_PARTNERS_LOGO_SINGLE_DISPLAY_WIDTH',
   'description' => '_MI_PARTNERS_LOGO_SINGLE_DISPLAY_WIDTH_DSC',
   'formtype' => 'text',
@@ -178,7 +178,7 @@ $modversion['config'][] = array(
   'default' =>  '300');
 
 $modversion['config'][] = array(
-  'name' => 'logo_block_display_width',
+  'name' => 'partners_logo_block_display_width',
   'title' => '_MI_PARTNERS_LOGO_BLOCK_DISPLAY_WIDTH',
   'description' => '_MI_PARTNERS_LOGO_BLOCK_DISPLAY_WIDTH_DSC',
   'formtype' => 'text',
@@ -186,7 +186,7 @@ $modversion['config'][] = array(
   'default' =>  '150');
 
 $modversion['config'][] = array(
-	'name' => 'logo_upload_height',
+	'name' => 'partners_logo_upload_height',
 	'title' => '_MI_PARTNERS_LOGO_UPLOAD_HEIGHT',
 	'description' => '_MI_PARTNERS_LOGO_UPLOAD_HEIGHT_DSC',
 	'formtype' => 'textbox',
@@ -194,7 +194,7 @@ $modversion['config'][] = array(
 	'default' =>  '500');
 
 $modversion['config'][] = array(
-	'name' => 'logo_upload_width',
+	'name' => 'partners_logo_upload_width',
 	'title' => '_MI_PARTNERS_LOGO_UPLOAD_WIDTH',
 	'description' => '_MI_PARTNERS_LOGO_UPLOAD_WIDTH_DSC',
 	'formtype' => 'textbox',
@@ -202,7 +202,7 @@ $modversion['config'][] = array(
 	'default' =>  '500');
 
 $modversion['config'][] = array(
-	'name' => 'logo_file_size',
+	'name' => 'partners_logo_file_size',
 	'title' => '_MI_PARTNERS_LOGO_FILE_SIZE',
 	'description' => '_MI_PARTNERS_LOGO_FILE_SIZE_DSC',
 	'formtype' => 'textbox',

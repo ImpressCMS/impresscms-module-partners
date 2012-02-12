@@ -35,12 +35,12 @@ function show_random_partners($options)
 	$partnerList = $partners = array();
 
 	// Get a list of partners filtered by tag
-	if (icms_get_module_status("sprockets") && $options[1] != 0)
+	if (icms_get_module_status("sprockets") && $options[3] != 0)
 	{
 		$query = "SELECT `partner_id` FROM " . $partners_partner_handler->table . ", "
 			. $sprockets_taglink_handler->table
 			. " WHERE `partner_id` = `iid`"
-			. " AND `tid` = '" . $options[1] . "'"
+			. " AND `tid` = '" . $options[3] . "'"
 			. " AND `mid` = '" . $partnersModule->getVar('mid') . "'"
 			. " AND `item` = 'partner'"
 			. " AND `online_status` = '1'"
@@ -74,7 +74,7 @@ function show_random_partners($options)
 	}
 	
 	// Pick random partners from the list, if the block preference is so set
-	if ($options[2] == TRUE) 
+	if ($options[1] == TRUE) 
 	{
 		shuffle($partner_list);
 	}
@@ -85,7 +85,10 @@ function show_random_partners($options)
 			
 	// Retrieve the partners and assign them to the block - need to shuffle a second time
 	$partners = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
-	shuffle($partners);
+	if ($options[1] == TRUE)
+	{
+		shuffle($partners);
+	}
 	
 	// Adjust the logo paths
 	foreach ($partners as $key => &$object)
@@ -95,8 +98,8 @@ function show_random_partners($options)
 	
 	// Assign to template
 	$block['random_partners'] = $partners;
-	$block['show_logos'] = $options[3];
-	$block['logo_block_display_width'] = icms_getConfig('logo_block_display_width', $partnersModule->getVar('dirname'));
+	$block['show_logos'] = $options[2];
+	$block['partners_logo_block_display_width'] = icms_getConfig('partners_logo_block_display_width', $partnersModule->getVar('dirname'));
 	
 	return $block;
 }

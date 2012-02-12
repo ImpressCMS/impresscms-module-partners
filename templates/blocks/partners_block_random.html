@@ -2,7 +2,7 @@
 	<{foreach item = partner from = $block.random_partners}>
 		<{if $partner.logo}>
 			<div class="partners_random_logo" style="text-align: center; margin: 1em 0em 0em 0em;">
-				<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$block.logo_block_display_width height="999" fit="inside"}></a>
+				<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$block.partners_logo_block_display_width height="999" fit="inside"}></a>
 			</div>
 		<{/if}>
 	<{/foreach}>

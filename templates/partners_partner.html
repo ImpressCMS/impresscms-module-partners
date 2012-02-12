@@ -23,14 +23,14 @@
 			</div>
 		<{/if}>
 		<{if $partners_partner.logo && $display_partner_logos}>
-			<{if $freestyle_logo_dimensions}>
+			<{if $partners_freestyle_logo_dimensions}>
 				<div class="<{$partner_logo_position}>">
 					<a href="<{$partners_partner.website}>"><img src="<{$partners_partner.logo}>" alt="<{$partners_partner.title}>" /></a>
 				</div>
 			<{else}>
 
 				<div class="<{$partner_logo_position}>">
-					<a href="<{$partners_partner.website}>"><{resized_image file=$partners_partner.logo width=$logo_display_width height="999" fit="inside"}></a>
+					<a href="<{$partners_partner.website}>"><{resized_image file=$partners_partner.logo width=$partners_logo_display_width height="999" fit="inside"}></a>
 				</div>
 			<{/if}>
 		<{/if}>
@@ -107,7 +107,7 @@
 		
 			<div class="partners_separator partners_clear">
 				<{if $partner.logo && $display_partner_logos}>
-					<{if $freestyle_logo_dimensions}>
+					<{if $partners_freestyle_logo_dimensions}>
 					
 						<div class="<{$partner_logo_position}>">
 							<a href="<{$partner.itemUrl}>"><img src="<{$partner.logo}>" alt="<{$partner.title}>" /></a>
@@ -116,7 +116,7 @@
 					<{else}>
 					
 						<div class="<{$partner_logo_position}>">
-							<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$logo_display_width height="999" fit="inside"}></a>
+							<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$partners_logo_display_width height="999" fit="inside"}></a>
 						</div>
 					
 					<{/if}>
