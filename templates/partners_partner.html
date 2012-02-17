@@ -105,7 +105,10 @@
 		
 		<{foreach item = partner from = $partner_summaries}>
 		
-			<div class="partners_separator partners_no_overflow">
+			<div class="partners_no_overflow">
+				<div>
+					<h2><a href="<{$partner.itemUrl}>"><{$partner.title}></a></h2>
+				</div>
 				<{if $partner.logo && $display_partner_logos}>
 					<{if $partners_freestyle_logo_dimensions}>
 					
@@ -121,10 +124,7 @@
 					
 					<{/if}>
 				<{/if}>
-				<div>
-					<h2><a href="<{$partner.itemUrl}>"><{$partner.title}></a></h2>
-					<p><{$partner.description}></p>
-				</div>
+				<div><p><{$partner.description}></p></div>
 			</div>
 		
 		<{/foreach}>
