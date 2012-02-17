@@ -33,6 +33,11 @@
 }
 
 /* Used to prevent partners overlapping logos of others on the index page */
+.partners_no_overflow
+{
+	overflow:auto;
+}
+
 .partners_clear
 {
 	clear:both;
