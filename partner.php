@@ -77,6 +77,12 @@ if($partnerObj && !$partnerObj->isNew())
 	// Convert partner to array for easy insertion to template
 	$partner = $partnerObj->toArray();
 	
+	// Add SEO friendly string to URL
+	if (!empty($partner['short_url']))
+	{
+		$partner['itemUrl'] .= "&amp;title=" . $partner['short_url'];
+	}
+	
 	if (!empty($partner['logo']))
 	{
 		$partner['logo'] = $document_root . 'uploads/' . $directory_name . '/partner/' . $partner['logo'];
@@ -231,6 +237,12 @@ else
 				. $partner['logo'];
 		}
 		
+			// Add SEO friendly string to URL
+		if (!empty($partner['short_url']))
+		{
+			$partner['itemUrl'] .= "&amp;title=" . $partner['short_url'];
+		}
+		
 		// Set logo display width
 		$icmsTpl->assign('partners_logo_display_width', icms::$module->config['partners_logo_index_display_width']);
 		
@@ -286,7 +298,7 @@ else
 		$objectTable = new icms_ipf_view_Table($partners_partner_handler, $criteria, array());
 		$objectTable->isForUserSide();
 		$objectTable->addQuickSearch('title');
-		$objectTable->addColumn(new icms_ipf_view_Column("title"));
+		$objectTable->addColumn(new icms_ipf_view_Column("title", _GLOBAL_LEFT, FALSE, addSEOStringToItemUrl));
 		$icmsTpl->assign("partners_partner_table", $objectTable->fetch());
 	}
 }
