@@ -90,10 +90,15 @@ function show_random_partners($options)
 		shuffle($partners);
 	}
 	
-	// Adjust the logo paths
+	// Adjust the logo paths and append SEO string to URLs
 	foreach ($partners as $key => &$object)
 	{
 		$object['logo'] = ICMS_URL . '/uploads/' . $partnersModule->getVar('dirname') . '/partner/' . $object['logo'];
+		
+		if (!empty($object['short_url']))
+		{
+			$object['itemUrl'] .= "&amp;title=" . $object['short_url'];
+		}
 	}
 	
 	// Assign to template
