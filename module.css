@@ -47,6 +47,7 @@
 .partners_separator 
 {
 	margin-bottom:1em;
+	overflow:auto;
 }
 
 /* Tableless layout */

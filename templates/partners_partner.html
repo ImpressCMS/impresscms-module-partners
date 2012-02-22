@@ -11,6 +11,25 @@
 			<div><h2><{$partners_partner.title}></h2>
 			</div>
 		<{/if}>
+		<{if $partners_partner.logo && $display_partner_logos}>
+			<{if $partners_freestyle_logo_dimensions}>
+				<div class="<{$partner_logo_position}>">
+					<{if $partners_partner.website}>
+						<a href="<{$partners_partner.website}>"><img src="<{$partners_partner.logo}>" alt="<{$partners_partner.title}>" /></a>
+					<{else}>
+						<img src="<{$partners_partner.logo}>" alt="<{$partners_partner.title}>" />
+					<{/if}>
+				</div>
+			<{else}>
+				<div class="<{$partner_logo_position}>">
+					<{if $partners_partner.website}>
+						<a href="<{$partners_partner.website}>"><{resized_image file=$partners_partner.logo width=$partners_logo_display_width height="999" fit="inside"}></a>
+					<{else}>
+						<{resized_image file=$partners_partner.logo width=$partners_logo_display_width height="999" fit="inside"}>
+					<{/if}>
+				</div>
+			<{/if}>
+		<{/if}>
 		<{if $partners_partner.counter || $partners_partner.tags}>
 			<div class="itemInfo">
 				<{if $partners_partner.counter}>
@@ -21,18 +40,6 @@
 					<{$smarty.const._CO_PARTNERS_PARTNER_TAGS}>: <{$partners_partner.tags}>
 				<{/if}>
 			</div>
-		<{/if}>
-		<{if $partners_partner.logo && $display_partner_logos}>
-			<{if $partners_freestyle_logo_dimensions}>
-				<div class="<{$partner_logo_position}>">
-					<a href="<{$partners_partner.website}>"><img src="<{$partners_partner.logo}>" alt="<{$partners_partner.title}>" /></a>
-				</div>
-			<{else}>
-
-				<div class="<{$partner_logo_position}>">
-					<a href="<{$partners_partner.website}>"><{resized_image file=$partners_partner.logo width=$partners_logo_display_width height="999" fit="inside"}></a>
-				</div>
-			<{/if}>
 		<{/if}>
 		<{if $partners_partner.extended_text}>
 			<div class="partners_separator"><{$partners_partner.extended_text}></div>
@@ -103,6 +110,7 @@
 			<{if $partners_navbar }><{$partners_navbar}><{/if}>
 		</div>
 		
+		<!-- Partner summary descriptions -->
 		<{foreach item = partner from = $partner_summaries}>
 		
 			<div class="partners_no_overflow">
@@ -130,7 +138,7 @@
 		<{/foreach}>
 
 		<!-- Pagination control -->
-		<div class="partners_clear">
+		<div class="partners_separator">
 			<{if $partners_navbar }><{$partners_navbar}><{/if}>
 		</div>
 		

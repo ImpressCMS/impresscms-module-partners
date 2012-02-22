@@ -229,19 +229,21 @@ else
 			$partner_summaries = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
 		}
 		
-		// Adjust the partner logo paths to allow dynamic resizing as per the resized_image Smarty plugin
+		// Prepare partners for display
 		foreach ($partner_summaries as &$partner)
 		{
+			// Adjust the partner logo paths to allow dynamic resizing as per the resized_image Smarty plugin.
 			if (!empty($partner['logo']))
 			$partner['logo'] = $document_root . 'uploads/' . $directory_name . '/partner/'
 				. $partner['logo'];
+			
+			// Add SEO friendly string to URL
+			if (!empty($partner['short_url']))
+			{
+				$partner['itemUrl'] .= "&amp;title=" . $partner['short_url'];
+			}
 		}
 		
-			// Add SEO friendly string to URL
-		if (!empty($partner['short_url']))
-		{
-			$partner['itemUrl'] .= "&amp;title=" . $partner['short_url'];
-		}
 		
 		// Set logo display width
 		$icmsTpl->assign('partners_logo_display_width', icms::$module->config['partners_logo_index_display_width']);
