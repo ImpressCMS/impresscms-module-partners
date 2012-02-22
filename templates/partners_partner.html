@@ -11,6 +11,17 @@
 			<div><h2><{$partners_partner.title}></h2>
 			</div>
 		<{/if}>
+		<{if $partners_partner.counter || $partners_partner.tags}>
+			<div class="itemInfo">
+				<{if $partners_partner.counter}>
+					<{$partners_partner.counter}> <{$smarty.const._CO_PARTNERS_PARTNER_VIEWS}>
+					<{if $partners_partner.counter && $partners_partner.tags}> | <{/if}>
+				<{/if}>
+				<{if $partners_partner.tags}>
+					<{$smarty.const._CO_PARTNERS_PARTNER_TAGS}>: <{$partners_partner.tags}>
+				<{/if}>
+			</div>
+		<{/if}>
 		<{if $partners_partner.logo && $display_partner_logos}>
 			<{if $partners_freestyle_logo_dimensions}>
 				<div class="<{$partner_logo_position}>">
@@ -29,17 +40,6 @@
 					<{/if}>
 				</div>
 			<{/if}>
-		<{/if}>
-		<{if $partners_partner.counter || $partners_partner.tags}>
-			<div class="itemInfo">
-				<{if $partners_partner.counter}>
-					<{$partners_partner.counter}> <{$smarty.const._CO_PARTNERS_PARTNER_VIEWS}>
-					<{if $partners_partner.counter && $partners_partner.tags}> | <{/if}>
-				<{/if}>
-				<{if $partners_partner.tags}>
-					<{$smarty.const._CO_PARTNERS_PARTNER_TAGS}>: <{$partners_partner.tags}>
-				<{/if}>
-			</div>
 		<{/if}>
 		<{if $partners_partner.extended_text}>
 			<div class="partners_separator"><{$partners_partner.extended_text}></div>
