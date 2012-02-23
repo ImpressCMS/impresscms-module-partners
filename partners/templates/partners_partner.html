@@ -1,0 +1,154 @@
+<{includeq file='db:partners_header.html'}>
+
+<!-- View single partner -->
+<{if $partners_partner}>
+	<div>
+		<{if $partners_partner.website}>
+			<div>
+				<h2><a href="<{$partners_partner.website}>"><{$partners_partner.title}></a></h2>
+			</div>
+		<{else}>
+			<div><h2><{$partners_partner.title}></h2>
+			</div>
+		<{/if}>
+		<{if $partners_partner.counter || $partners_partner.tags}>
+			<div class="itemInfo">
+				<{if $partners_partner.counter}>
+					<{$partners_partner.counter}> <{$smarty.const._CO_PARTNERS_PARTNER_VIEWS}>
+					<{if $partners_partner.counter && $partners_partner.tags}> | <{/if}>
+				<{/if}>
+				<{if $partners_partner.tags}>
+					<{$smarty.const._CO_PARTNERS_PARTNER_TAGS}>: <{$partners_partner.tags}>
+				<{/if}>
+			</div>
+		<{/if}>
+		<{if $partners_partner.logo && $display_partner_logos}>
+			<{if $partners_freestyle_logo_dimensions}>
+				<div class="<{$partner_logo_position}>">
+					<{if $partners_partner.website}>
+						<a href="<{$partners_partner.website}>"><img src="<{$partners_partner.logo}>" alt="<{$partners_partner.title}>" /></a>
+					<{else}>
+						<img src="<{$partners_partner.logo}>" alt="<{$partners_partner.title}>" />
+					<{/if}>
+				</div>
+			<{else}>
+				<div class="<{$partner_logo_position}>">
+					<{if $partners_partner.website}>
+						<a href="<{$partners_partner.website}>"><{resized_image file=$partners_partner.logo width=$partners_logo_display_width height="999" fit="inside"}></a>
+					<{else}>
+						<{resized_image file=$partners_partner.logo width=$partners_logo_display_width height="999" fit="inside"}>
+					<{/if}>
+				</div>
+			<{/if}>
+		<{/if}>
+		<{if $partners_partner.extended_text}>
+			<div class="partners_separator"><{$partners_partner.extended_text}></div>
+		<{else}>
+			<div class="partners_separator"><{$partners_partner.description}></div>
+		<{/if}>
+		<div class="partners_table">
+			<{if $partners_partner.contact_name}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_NAME}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_name}></div>
+				</div>
+			<{/if}>
+			<{if $partners.partner.contact_name && $partners_partner.contact_position}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_POSITION}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_position}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.contact_phone}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_PHONE}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_phone}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.contact_fax}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_FAX}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_fax}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.contact_email}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_CONTACT_EMAIL}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.contact_email}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.address}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_ADDRESS}>: </strong></div>
+					<div class="partners_right_cell"><{$partners_partner.address}></div>
+				</div>
+			<{/if}>
+			<{if $partners_partner.website}>
+				<div class="partners_row">
+					<div class="partners_left_cell"><strong><{$smarty.const._CO_PARTNERS_PARTNER_WEBSITE}>: </strong></div>
+					<div class="partners_right_cell"><a href="<{$partners_partner.website}>"><{$partners_partner.website}></a></div>
+				</div>
+			<{/if}>
+		</div>
+	</div>
+<{/if}>
+
+<!-- Tag select box - index page only -->
+<{if $partner_summaries || $partners_partner_table}>
+	<div>
+		<{if $partners_show_tag_select_box}>
+			<{$partners_show_tag_select_box}>
+		<{/if}>
+	</div>
+<{/if}>
+
+<!-- View partner index in summary mode -->
+<{if $partner_summaries}>
+	<div>		
+		<!-- Pagination control -->
+		<div>
+			<{if $partners_navbar }><{$partners_navbar}><{/if}>
+		</div>
+		
+		<!-- Partner summary descriptions -->
+		<{foreach item = partner from = $partner_summaries}>
+		
+			<div class="partners_no_overflow">
+				<div>
+					<h2><a href="<{$partner.itemUrl}>"><{$partner.title}></a></h2>
+				</div>
+				<{if $partner.logo && $display_partner_logos}>
+					<{if $partners_freestyle_logo_dimensions}>
+					
+						<div class="<{$partner_logo_position}>">
+							<a href="<{$partner.itemUrl}>"><img src="<{$partner.logo}>" alt="<{$partner.title}>" /></a>
+						</div>
+					
+					<{else}>
+					
+						<div class="<{$partner_logo_position}>">
+							<a href="<{$partner.itemUrl}>"><{resized_image file=$partner.logo width=$partners_logo_display_width height="999" fit="inside"}></a>
+						</div>
+					
+					<{/if}>
+				<{/if}>
+				<div><p><{$partner.description}></p></div>
+			</div>
+		
+		<{/foreach}>
+
+		<!-- Pagination control -->
+		<div class="partners_separator">
+			<{if $partners_navbar }><{$partners_navbar}><{/if}>
+		</div>
+		
+	</div>
+<{/if}>
+
+<!-- View partner index as compact table -->
+<{if $partners_partner_table}>
+	<h1><{$partners_title}></h1>
+	<{$partners_partner_table}>
+<{/if}>
+
+<{includeq file='db:partners_footer.html'}>

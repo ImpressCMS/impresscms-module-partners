@@ -1,0 +1,17 @@
+<{if $partners_show_breadcrumb == TRUE}>
+	<div class="partners_headertable">
+
+			<{if $partners_module_home}>
+				<span class="partners_modulename"><{$partners_module_home}></span>
+			<{/if}>
+			<{if $partners_category_path}>
+				<span class="partners_breadcrumb"><{if $partners_module_home}>&gt; <{/if}><{$partners_category_path}></span>
+			<{/if}>
+	</div>
+<{else}>
+	<{if $partners_page_title}>
+		<h1>
+			<{$partners_page_title}><{if $partners_tag_name}> - <{$partners_tag_name}><{/if}>
+		</h1>
+	<{/if}>
+<{/if}>
