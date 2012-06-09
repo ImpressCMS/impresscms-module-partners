@@ -12,5 +12,5 @@
  * @version		$Id$
  */
 
-header("location: partner.php");
+include 'partner.php'';
 exit;
