@@ -12,5 +12,5 @@
  * @version		$Id$
  */
 
-include 'partner.php'';
+include 'partner.php';
 exit;
