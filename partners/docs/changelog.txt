@@ -1,0 +1,13 @@
+Version 1.0
+===========
+- First public release of the module.
+
+Version 1.01
+============
+
+- Fix slow index page load when gzip enabled.
+
+Version 1.02
+============
+
+- Fix templates for W3C html compliance.
