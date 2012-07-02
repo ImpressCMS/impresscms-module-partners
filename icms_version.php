@@ -33,9 +33,9 @@ $modversion = array(
 	"image"						=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	"status_version"			=> "1.03",
-	"status"					=> "Experimental",
-	"date"						=> "2/7/2012",
+	"status_version"			=> "1.02",
+	"status"					=> "Final",
+	"date"						=> "16/6/2012",
 	"author_word"				=> "For ICMS 1.3+ only.",
 
 /** Contributors */
