@@ -99,7 +99,7 @@ if($partnerObj && !$partnerObj->isNew())
 	if (icms_get_module_status("sprockets"))
 	{
 		$partner['tags'] = array();
-		$partner_tag_array = $sprockets_taglink_handler->getTagsForObject($partnerObj->getVar('partner_id'), $partners_partner_handler);
+		$partner_tag_array = $sprockets_taglink_handler->getTagsForObject($partnerObj->getVar('partner_id'), $partners_partner_handler, 0);
 		foreach ($partner_tag_array as $key => $value)
 		{
 			$partner['tags'][$value] = '<a href="' . PARTNERS_URL . 'partner.php?tag_id=' . $value 
