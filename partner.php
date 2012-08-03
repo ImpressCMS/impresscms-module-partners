@@ -39,14 +39,15 @@ if (icms_get_module_status("sprockets"))
 	icms_loadLanguageFile("sprockets", "common");
 	$sprockets_tag_handler = icms_getModuleHandler('tag', $sprocketsModule->getVar('dirname'), 'sprockets');
 	$sprockets_taglink_handler = icms_getModuleHandler('taglink', $sprocketsModule->getVar('dirname'), 'sprockets');
-	$sprockets_tag_buffer = $sprockets_tag_handler->getObjects(NULL, TRUE, FALSE);
+	$criteria = icms_buildCriteria(array('label_type' => '0'));
+	$sprockets_tag_buffer = $sprockets_tag_handler->getObjects($criteria, TRUE, TRUE);
 	
 	// Append the tag to the breadcrumb title
 	if (array_key_exists($clean_tag_id, $sprockets_tag_buffer) && ($clean_tag_id !== 0))
 	{
-		$partners_tag_name = $sprockets_tag_buffer[$clean_tag_id]['title'];
+		$partners_tag_name = $sprockets_tag_buffer[$clean_tag_id]->getVar('title', 'e');
 		$icmsTpl->assign('partners_tag_name', $partners_tag_name);
-		$icmsTpl->assign('partners_category_path', $sprockets_tag_buffer[$clean_tag_id]['title']);
+		$icmsTpl->assign('partners_category_path', $sprockets_tag_buffer[$clean_tag_id]->getVar('title', 'e'));
 	}
 }
 
@@ -103,7 +104,7 @@ if($partnerObj && !$partnerObj->isNew())
 		foreach ($partner_tag_array as $key => $value)
 		{
 			$partner['tags'][$value] = '<a href="' . PARTNERS_URL . 'partner.php?tag_id=' . $value 
-					. '">' . $sprockets_tag_buffer[$value]['title'] . '</a>';
+					. '">' . $sprockets_tag_buffer[$value]->getVar('title', 'e') . '</a>';
 		}
 		$partner['tags'] = implode(', ', $partner['tags']);
 	}
