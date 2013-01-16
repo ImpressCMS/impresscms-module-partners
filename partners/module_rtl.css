@@ -1,0 +1,67 @@
+.partners_headertable
+{
+	padding: 0; margin: 0; border-bottom: 1px solid; margin-bottom: 10px;
+}
+
+.partners_modulename
+{
+	font-size: 0.8em; text-align: left; font-weight: bold; padding-right: 0.3em; line-height: 18px;
+}
+
+.partners_breadcrumb
+{
+	font-size: 0.8em; line-height: 18px;
+}
+
+.partners_adminlinks
+{
+	padding-top: 15px; padding-bottom: 5px; font-size: 0.8em; text-align: center; line-height: 18px;
+}
+
+/* Used to display partner logos, floated to the right */
+.partners_float_right 
+{
+	float:right;
+	margin: 0em 0em 1em 1em;
+}
+
+/* Used to display partner logos, floated to the left */
+.partners_float_left 
+{
+	float:left;
+	margin: 0em 1em 1em 0em;
+}
+
+/* Used to prevent partners overlapping logos of others on the index page */
+.partners_clear
+{
+	clear:both;
+}
+
+/* Used to vertically space elements to neaten up the display */
+.partners_separator 
+{
+	margin-bottom:1em;
+}
+
+/* Tableless layout */
+.partners_table
+{
+	display: table;
+}
+
+.partners_row
+{
+	display: table-row;
+}
+
+.partners_left_cell
+{
+	display: table-cell;
+	padding-right: 1em;
+}
+
+.partners_right_cell
+{
+	display: table-cell;
+}
