@@ -14,7 +14,7 @@
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 
-function partners_search($queryarray, $andor, $limit, $offset = 0, $userid)
+function partners_search($queryarray, $andor, $limit, $offset = 0, $userid = 0)
 {
 	global $icmsConfigSearch;
 	
