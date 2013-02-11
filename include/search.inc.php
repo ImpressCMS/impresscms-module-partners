@@ -14,22 +14,47 @@
 
 defined("ICMS_ROOT_PATH") or die("ICMS root path not defined");
 
-function partners_search($queryarray, $andor, $limit, $offset, $userid)
+function partners_search($queryarray, $andor, $limit, $offset = 0, $userid)
 {
+	global $icmsConfigSearch;
+	
+	$partnersArray = $ret = array();
+	$count = $number_to_process = $partners_left = '';
+	
 	$partners_partner_handler = icms_getModuleHandler("partner", basename(dirname(dirname(__FILE__))), "partners");
-	$partnerArray = $partners_partner_handler->getPartnersForSearch($queryarray, $andor, $limit, $offset, $userid);
-	$ret = array();
+	$partnersArray = $partners_partner_handler->getPartnersForSearch($queryarray, $andor, $limit, $offset, $userid);
+	
+	// Count the number of records
+	$count = count($partnersArray);
+	
+	// The number of records actually containing partner objects is <= $limit, the rest are padding
+	$partners_left = ($count - ($offset + $icmsConfigSearch['search_per_page']));
+	if ($partners_left < 0) {
+		$number_to_process = $icmsConfigSearch['search_per_page'] + $partners_left; // $partners_left is negative
+	} else {
+		$number_to_process = $icmsConfigSearch['search_per_page'];
+	}
 
-	foreach ($partnerArray as $partner) 
+	// Process the actual partners (not the padding)
+	for ($i = 0; $i < $number_to_process; $i++)
 	{
 		$item['image'] = "images/partner.png";
-		$item['link'] = $partner->getItemLink(TRUE);
-		$item['title'] = $partner->getVar("title");
-		$item['time'] = $partner->getVar("date", "e");
-		$item['uid'] = $partner->getVar("creator");
+		$item['link'] = $partnersArray[$i]->getItemLink(TRUE);
+		$item['title'] = $partnersArray[$i]->getVar("title");
+		$item['time'] = $partnersArray[$i]->getVar("date", "e");
+		$item['uid'] = $partnersArray[$i]->getVar("creator");
 		$ret[] = $item;
 		unset($item);
 	}
 
+	// Restore the padding (required for 'hits' information and pagination controls). The offset
+	// must be padded to the left of the results, and the remainder to the right or else the search
+	// pagination controls will display the wrong results (which will all be empty).
+	// Left padding = -($limit + $offset)
+	$ret = array_pad($ret, -($offset + $number_to_process), 1);
+	
+	// Right padding = $count
+	$ret = array_pad($ret, $count, 1);
+	
 	return $ret;
 }
