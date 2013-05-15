@@ -18,3 +18,7 @@ Version 1.03
 Version 1.04
 ============
 - Improve efficiency of search function.
+
+Version 1.05
+============
+- Fix error in search criteria, submitter should be creator.

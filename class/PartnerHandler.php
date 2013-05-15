@@ -72,7 +72,7 @@ class mod_partners_PartnerHandler extends icms_ipf_Handler
 		$criteria = new icms_db_criteria_Compo();
 
 		if ($userid != 0) {
-			$criteria->add(new icms_db_criteria_Item('submitter', $userid));
+			$criteria->add(new icms_db_criteria_Item('creator', $userid));
 		}
 		
 		if ($queryarray) {
