@@ -38,13 +38,15 @@ function partners_search($queryarray, $andor, $limit, $offset = 0, $userid = 0)
 	// Process the actual partners (not the padding)
 	for ($i = 0; $i < $number_to_process; $i++)
 	{
-		$item['image'] = "images/partner.png";
-		$item['link'] = $partnersArray[$i]->getItemLink(TRUE);
-		$item['title'] = $partnersArray[$i]->getVar("title");
-		$item['time'] = $partnersArray[$i]->getVar("date", "e");
-		$item['uid'] = $partnersArray[$i]->getVar("creator");
-		$ret[] = $item;
-		unset($item);
+		if (is_object($partnersArray[$i])) { // Required to prevent crashing on profile view
+			$item['image'] = "images/partner.png";
+			$item['link'] = $partnersArray[$i]->getItemLink(TRUE);
+			$item['title'] = $partnersArray[$i]->getVar("title");
+			$item['time'] = $partnersArray[$i]->getVar("date", "e");
+			$item['uid'] = $partnersArray[$i]->getVar("creator");
+			$ret[] = $item;
+			unset($item);
+		}
 	}
 
 	// Restore the padding (required for 'hits' information and pagination controls). The offset

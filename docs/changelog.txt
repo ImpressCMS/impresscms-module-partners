@@ -22,3 +22,4 @@ Version 1.04
 Version 1.05
 ============
 - Fix error in search criteria, submitter should be creator.
+- Fix bug in search function that was crashing profile views.
