@@ -23,3 +23,4 @@ Version 1.05
 ============
 - Fix error in search criteria, submitter should be creator.
 - Fix bug in search function that was crashing profile views.
+- Add extended_text to searchable fields.
