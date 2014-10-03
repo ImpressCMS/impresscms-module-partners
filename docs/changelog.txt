@@ -24,3 +24,7 @@ Version 1.05
 - Fix error in search criteria, submitter should be creator.
 - Fix bug in search function that was crashing profile views.
 - Add extended_text to searchable fields.
+
+Version 1.06 (unreleased)
+=========================
+- Add static 'type' field identifying partners as "Text" resources.
