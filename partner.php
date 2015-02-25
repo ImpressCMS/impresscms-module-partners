@@ -14,9 +14,9 @@ include_once "header.php";
 
 $xoopsOption["template_main"] = "partners_partner.html";
 include_once ICMS_ROOT_PATH . "/header.php";
-$untagged_content = FALSE;
 
 // Sanitise input parameters
+$untagged_content = FALSE;
 $clean_partner_id = isset($_GET["partner_id"]) ? (int)$_GET["partner_id"] : 0 ;
 if (isset($_GET['tag_id'])) {
 	if ($_GET['tag_id'] == 'untagged') {
