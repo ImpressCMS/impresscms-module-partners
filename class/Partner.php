@@ -76,6 +76,8 @@ class mod_partners_Partner extends icms_ipf_seo_Object
 			$this->hideFieldFromForm('tag');
 			$this->hideFieldFromSingleView ('tag');
 		}
+		$this->hideFieldFromForm('type');
+		$this->hideFieldFromSingleView('type');
 
 		// Intialise SEO functionality
 		$this->initiateSEO();
