@@ -94,13 +94,11 @@
 <{/if}>
 
 <!-- Tag select box - index page only -->
-<{if $partner_summaries || $partners_partner_table}>
-	<div>
-		<{if $partners_show_tag_select_box}>
-			<{$partners_show_tag_select_box}>
-		<{/if}>
-	</div>
-<{/if}>
+<div>
+	<{if $partners_show_tag_select_box}>
+		<{$partners_show_tag_select_box}>
+	<{/if}>
+</div>
 
 <!-- View partner index in summary mode -->
 <{if $partner_summaries}>

@@ -26,6 +26,12 @@ function show_random_partners($options)
 	$sprocketsModule = icms_getModuleInfo('sprockets');
 	include_once(ICMS_ROOT_PATH . '/modules/' . $partnersModule->getVar('dirname') . '/include/common.php');
 	$partners_partner_handler = icms_getModuleHandler('partner', $partnersModule->getVar('dirname'), 'partners');
+	// Check for dynamic tag filtering, including by untagged content
+	$untagged_content = FALSE;
+	if ($options[4] == 1 && isset($_GET['tag_id'])) {
+		$untagged_content = ($_GET['tag_id'] == 'untagged') ? TRUE : FALSE;
+		$options[3] = (int)trim($_GET['tag_id']);
+	}
 	if (icms_get_module_status("sprockets"))
 	{
 		$sprockets_taglink_handler = icms_getModuleHandler('taglink', $sprocketsModule->getVar('dirname'), 'sprockets');
@@ -35,7 +41,7 @@ function show_random_partners($options)
 	$partnerList = $partners = array();
 
 	// Get a list of partners filtered by tag
-	if (icms_get_module_status("sprockets") && $options[3] != 0)
+	if (icms_get_module_status("sprockets") && ($options[3] != 0 || $untagged_content))
 	{
 		$query = "SELECT `partner_id` FROM " . $partners_partner_handler->table . ", "
 			. $sprockets_taglink_handler->table
@@ -93,8 +99,9 @@ function show_random_partners($options)
 	// Adjust the logo paths and append SEO string to URLs
 	foreach ($partners as $key => &$object)
 	{
-		$object['logo'] = ICMS_URL . '/uploads/' . $partnersModule->getVar('dirname') . '/partner/' . $object['logo'];
-		
+		if (!empty($object['logo'])) {
+			$object['logo'] = ICMS_URL . '/uploads/' . $partnersModule->getVar('dirname') . '/partner/' . $object['logo'];
+		}		
 		if (!empty($object['short_url']))
 		{
 			$object['itemUrl'] .= "&amp;title=" . $object['short_url'];
@@ -188,7 +195,20 @@ function edit_random_partners($options)
 		$form_select = new icms_form_elements_Select('', 'options[3]', $options[3], '1', FALSE);
 		$form_select->addOptionArray($tagList);
 		$form .= '<td>' . $form_select->render() . '</td></tr>';
-	}
+		
+		// Dynamic tagging (overrides static tag filter)
+		$form .= '<tr><td>' . _MB_PARTNERS_DYNAMIC_TAG . '</td>';			
+		$form .= '<td><input type="radio" name="options[4]" value="1"';
+		if ($options[4] == 1) {
+			$form .= ' checked="checked"';
+		}
+		$form .= '/>' . _MB_PARTNERS_PROJECT_YES;
+		$form .= '<input type="radio" name="options[4]" value="0"';
+		if ($options[4] == 0) {
+			$form .= 'checked="checked"';
+		}
+		$form .= '/>' . _MB_PARTNERS_PROJECT_NO . '</td></tr>';
+		}
 	
 	$form .= '</table>';
 	

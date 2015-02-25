@@ -43,16 +43,19 @@ include_once "admin_header.php";
 $partners_partner_handler = icms_getModuleHandler("partner", basename(dirname(dirname(__FILE__))), "partners");
 /** Use a naming convention that indicates the source of the content of the variable */
 $clean_op = "";
-/** Create a whitelist of valid values, be sure to use appropriate types for each value
- * Be sure to include a value for no parameter, if you have a default condition
- */
 $valid_op = array ("mod", "changedField", "addpartner", "del", "view", "changeWeight", "visible", "");
 
+// Sanitise input paramters
+$clean_partner_id = isset($_GET["partner_id"]) ? (int)$_GET["partner_id"] : 0 ;
+$untagged_content = FALSE;
+if (isset($_GET['tag_id'])) {
+	if ($_GET['tag_id'] == 'untagged') {
+		$untagged_content = TRUE;
+	}
+}
+$clean_tag_id = isset($_GET['tag_id']) ? (int)$_GET['tag_id'] : 0 ;
 if (isset($_GET["op"])) $clean_op = htmlentities($_GET["op"]);
 if (isset($_POST["op"])) $clean_op = htmlentities($_POST["op"]);
-
-$clean_partner_id = isset($_GET["partner_id"]) ? (int)$_GET["partner_id"] : 0 ;
-$clean_tag_id = isset($_GET['tag_id']) ? (int)$_GET['tag_id'] : 0 ;
 
 if (in_array($clean_op, $valid_op, TRUE))
 {
@@ -130,16 +133,23 @@ if (in_array($clean_op, $valid_op, TRUE))
 				$taglink_array = $tagged_partner_list = array();
 				$sprockets_tag_handler = icms_getModuleHandler('tag', 'sprockets', 'sprockets');
 				$sprockets_taglink_handler = icms_getModuleHandler('taglink', 'sprockets', 'sprockets');
-
-				$tag_select_box = $sprockets_tag_handler->getTagSelectBox('partner.php', $clean_tag_id,
-					_AM_PARTNERS_PARTNER_ALL_PARTNERS, FALSE, icms::$module->getVar('mid'));
+				
+				if ($untagged_content) {
+					$tag_select_box = $sprockets_tag_handler->getTagSelectBox('partner.php',
+							'untagged', _AM_PARTNERS_PARTNER_ALL_PARTNERS, FALSE, 
+							icms::$module->getVar('mid'), 'partner', TRUE);
+				} else {
+					$tag_select_box = $sprockets_tag_handler->getTagSelectBox('partner.php', 
+							$clean_tag_id, _AM_PARTNERS_PARTNER_ALL_PARTNERS, FALSE,
+							icms::$module->getVar('mid'), 'partner', TRUE);
+				}
 				
 				if (!empty($tag_select_box)) {
 					echo '<h3>' . _AM_PARTNERS_PARTNER_FILTER_BY_TAG . '</h3>';
 					echo $tag_select_box;
 				}
 
-				if ($clean_tag_id)
+				if ($clean_tag_id || $untagged_content)
 				{
 					// Get a list of partner IDs belonging to this tag
 					$criteria = new icms_db_criteria_Compo();

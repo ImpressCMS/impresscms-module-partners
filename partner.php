@@ -14,9 +14,15 @@ include_once "header.php";
 
 $xoopsOption["template_main"] = "partners_partner.html";
 include_once ICMS_ROOT_PATH . "/header.php";
+$untagged_content = FALSE;
 
 // Sanitise input parameters
 $clean_partner_id = isset($_GET["partner_id"]) ? (int)$_GET["partner_id"] : 0 ;
+if (isset($_GET['tag_id'])) {
+	if ($_GET['tag_id'] == 'untagged') {
+		$untagged_content = TRUE;
+	}
+}
 $clean_tag_id = isset($_GET["tag_id"]) ? (int)$_GET["tag_id"] : 0 ;
 $clean_start = isset($_GET["start"]) ? intval($_GET["start"]) : 0;
 
@@ -134,8 +140,13 @@ else
 		// Load the tag navigation select box
 		// $action, $selected = null, $zero_option_message = '---', 
 		// $navigation_elements_only = TRUE, $module_id = null, $item = null,
-		$tag_select_box = $sprockets_tag_handler->getTagSelectBox('partner.php', $clean_tag_id, 
-				_CO_PARTNERS_PARTNER_ALL_TAGS, TRUE, icms::$module->getVar('mid'));
+		if ($untagged_content) {
+			$tag_select_box = $sprockets_tag_handler->getTagSelectBox('partner.php', 'untagged', 
+				_CO_PARTNERS_PARTNER_ALL_TAGS, TRUE, icms::$module->getVar('mid'), 'partner', TRUE);
+		} else {
+			$tag_select_box = $sprockets_tag_handler->getTagSelectBox('partner.php', $clean_tag_id, 
+				_CO_PARTNERS_PARTNER_ALL_TAGS, TRUE, icms::$module->getVar('mid'), 'partner', TRUE);
+		}
 		$icmsTpl->assign('partners_show_tag_select_box', $tag_select_box);
 	}
 	
@@ -149,7 +160,7 @@ else
 	if (icms::$module->config['partners_index_display_mode'] == TRUE)
 	{		
 		// Retrieve partners for a given tag
-		if ($clean_tag_id && icms_get_module_status("sprockets"))
+		if (($clean_tag_id || $untagged_content) && icms_get_module_status("sprockets"))
 		{
 			/**
 			 * Retrieve a list of partners JOINED to taglinks by partner_id/tag_id/module_id/item

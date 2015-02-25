@@ -28,3 +28,5 @@ Version 1.05
 Version 1.06 (unreleased)
 =========================
 - Add static 'type' field identifying partners as "Text" resources.
+- Add support for untagged content.
+- Add support for dynamic tag filtering to recent partners block.

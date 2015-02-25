@@ -19,3 +19,8 @@ define("_MB_PARTNERS_RANDOM_OR_FIXED", "Randomise? (Do not cache the block!)");
 define("_MB_PARTNERS_LOGOS_OR_LIST", "Show partner logos in block?");
 define("_MB_PARTNERS_RANDOM_YES", "Yes");
 define("_MB_PARTNERS_RANDOM_NO", "No");
+
+// New in V1.05
+define("_MB_PARTNERS_DYNAMIC_TAG", "Dynamic tagging (overrides static tag filter).");
+define("_MB_PARTNERS_PROJECT_YES", "Yes");
+define("_MB_PARTNERS_PROJECT_NO", "No");
