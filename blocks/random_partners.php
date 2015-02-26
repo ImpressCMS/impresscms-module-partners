@@ -38,7 +38,7 @@ function show_random_partners($options)
 	}
 	
 	$criteria = new icms_db_criteria_Compo();
-	$partnerList = $partners = array();
+	$partner_list = $partners = array();
 
 	// Get a list of partners filtered by tag
 	if (icms_get_module_status("sprockets") && ($options[3] != 0 || $untagged_content))
@@ -80,38 +80,41 @@ function show_random_partners($options)
 	}
 	
 	// Pick random partners from the list, if the block preference is so set
-	if ($options[1] == TRUE) 
+	if ($options[1] == TRUE && !empty($partner_list)) 
 	{
 		shuffle($partner_list);
 	}
-	
-	// Cut the partner list down to the number of required entries and set the IDs as criteria
-	$partner_list = array_slice($partner_list, 0, $options[0], TRUE);
-	$criteria->add(new icms_db_criteria_Item('partner_id', '(' . implode(',', $partner_list) . ')', 'IN'));
-			
+		
 	// Retrieve the partners and assign them to the block - need to shuffle a second time
-	$partners = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
-	if ($options[1] == TRUE)
-	{
-		shuffle($partners);
-	}
-	
-	// Adjust the logo paths and append SEO string to URLs
-	foreach ($partners as $key => &$object)
-	{
-		if (!empty($object['logo'])) {
-			$object['logo'] = ICMS_URL . '/uploads/' . $partnersModule->getVar('dirname') . '/partner/' . $object['logo'];
-		}		
-		if (!empty($object['short_url']))
+	if (!empty($partner_list)) {
+		// Cut the partner list down to the number of required entries and set the IDs as criteria
+		$partner_list = array_slice($partner_list, 0, $options[0], TRUE);
+		$criteria->add(new icms_db_criteria_Item('partner_id', '(' . implode(',', $partner_list) . ')', 'IN'));
+		$partners = $partners_partner_handler->getObjects($criteria, TRUE, FALSE);
+		if ($options[1] == TRUE)
 		{
-			$object['itemUrl'] .= "&amp;title=" . $object['short_url'];
+			shuffle($partners);
 		}
+		
+		// Adjust the logo paths and append SEO string to URLs
+		foreach ($partners as $key => &$object)
+		{
+			if (!empty($object['logo'])) {
+				$object['logo'] = ICMS_URL . '/uploads/' . $partnersModule->getVar('dirname') . '/partner/' . $object['logo'];
+			}		
+			if (!empty($object['short_url']))
+			{
+				$object['itemUrl'] .= "&amp;title=" . $object['short_url'];
+			}
+		
+		// Assign to template
+		$block['random_partners'] = $partners;
+		$block['show_logos'] = $options[2];
+		$block['partners_logo_block_display_width'] = icms_getConfig('partners_logo_block_display_width', $partnersModule->getVar('dirname'));
+		}
+	} else {
+		$block = array();
 	}
-	
-	// Assign to template
-	$block['random_partners'] = $partners;
-	$block['show_logos'] = $options[2];
-	$block['partners_logo_block_display_width'] = icms_getConfig('partners_logo_block_display_width', $partnersModule->getVar('dirname'));
 	
 	return $block;
 }
@@ -208,7 +211,7 @@ function edit_random_partners($options)
 			$form .= 'checked="checked"';
 		}
 		$form .= '/>' . _MB_PARTNERS_PROJECT_NO . '</td></tr>';
-		}
+	}
 	
 	$form .= '</table>';
 	
