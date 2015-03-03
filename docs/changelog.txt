@@ -30,3 +30,5 @@ Version 1.06 (unreleased)
 - Add static 'type' field identifying partners as "Text" resources.
 - Add support for untagged content.
 - Add support for dynamic tag filtering to recent partners block.
+- Correct category path in breadcrumb
+- Replace image control with imageupload.

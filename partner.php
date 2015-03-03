@@ -49,11 +49,13 @@ if (icms_get_module_status("sprockets"))
 	$sprockets_tag_buffer = $sprockets_tag_handler->getList($criteria, TRUE, TRUE);
 	
 	// Append the tag to the breadcrumb title
-	if (array_key_exists($clean_tag_id, $sprockets_tag_buffer) && ($clean_tag_id !== 0))
+	if (array_key_exists($clean_tag_id, $sprockets_tag_buffer) && ($clean_tag_id != 0))
 	{
 		$partners_tag_name = $sprockets_tag_buffer[$clean_tag_id];
 		$icmsTpl->assign('partners_tag_name', $partners_tag_name);
 		$icmsTpl->assign('partners_category_path', $sprockets_tag_buffer[$clean_tag_id]);
+	} elseif ($untagged_content) {
+		$icmsTpl->assign('partners_category_path', _CO_PARTNERS_UNTAGGED);
 	}
 }
 
@@ -223,10 +225,9 @@ else
 				}
 			}
 		}
-				
-		// Retrieve partners without filtering by tag
 		else
 		{
+			// Retrieve partners without filtering by tag
 			$criteria = new icms_db_criteria_Compo();
 			$criteria->add(new icms_db_criteria_Item('online_status', TRUE));
 			
@@ -286,7 +287,7 @@ else
 		
 		$tagged_partner_list = '';
 		
-		if ($clean_tag_id && icms_get_module_status("sprockets")) 
+		if (($clean_tag_id || $untagged_content) && icms_get_module_status("sprockets")) 
 		{
 			// Get a list of partner IDs belonging to this tag
 			$criteria = new icms_db_criteria_Compo();

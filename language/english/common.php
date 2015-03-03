@@ -53,3 +53,7 @@ define("_CO_PARTNERS_PARTNER_VIEWS", "views");
 // Tag select box
 define("_CO_PARTNERS_PARTNER_ALL_TAGS", "-- All --");
 define("_CO_PARTNERS_PARTNER_TAGS", "Tags");
+
+// New in V1.06
+define("_CO_PARTNERS_ALL", "All");
+define("_CO_PARTNERS_UNTAGGED", "Untagged");
